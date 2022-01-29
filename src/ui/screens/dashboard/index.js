@@ -1,10 +1,12 @@
-import { FaWhatsapp, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { getExperienceYear } from "../../../helpers";
+import { Experience } from "./components";
+import { CONTACT_DATA } from "./contact-data";
 export const DashboardScreen = () => {
   return (
-    <div className="flex select-none">
-      <div className="h-screen w-full  ml-16 bg-gray-800 flex">
-        <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-9/12 w-full mt-4">
-          <Header />
+    <div className="flex min-h-screen select-none bg-gray-800">
+      <div className="h-full w-full ml-16">
+        <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-9/12 w-full mt-4 pb-4">
+          <Profile />
           <Body />
         </div>
       </div>
@@ -16,22 +18,8 @@ const Divider = () => (
   <div className="w-full bg-gray-500 h-[0.5px] mt-6 mb-3" />
 );
 
-const Experience = () => (
-  <div>
-    <p className="text-white text-xl">Experience</p>
-    <p className="text-white text-xs">Coming Soon</p>
-  </div>
-);
-
-const Education = () => (
-  <div>
-    <p className="text-white text-xl">Education</p>
-    <p className="text-white text-xs">Coming Soon</p>
-  </div>
-);
-
 const Portfolio = () => (
-  <div>
+  <div className="mb-10">
     <p className="text-white text-xl">Portfolio</p>
     <p className="text-white text-xs">Coming Soon</p>
   </div>
@@ -40,15 +28,13 @@ const Portfolio = () => (
 const Body = () => (
   <div className="flex flex-col mx-4">
     <Divider />
-    <Education />
-    <Divider />
     <Experience />
     <Divider />
     <Portfolio />
   </div>
 );
 
-const Header = () => (
+const Profile = () => (
   <div className="flex flex-col md:flex-row mx-4">
     <img
       className="h-24 w-24 rounded-full md:w-32 md:h-32"
@@ -59,9 +45,10 @@ const Header = () => (
       <h1 className="font-bold text-3xl text-white">Farkhan Azmi</h1>
       <h1 className="text-lg text-white font-mono">Software Engineer</h1>
       <h1 className="text-white text-xs">
-        Talented software engineer with 2+ years of work experience. who always
-        try to challenge and learn some new experiences, knowledge, and skills.
-        Have the ability to work alone or collaborate with a team.
+        Talented software engineer with {getExperienceYear("2020")}+ years of
+        work experience. who always try to challenge and learn some new
+        experiences, knowledge, and skills. Have the ability to work alone or
+        collaborate with a team.
       </h1>
       <div className="flex-row flex flex-wrap">
         {CONTACT_DATA.map((element) => (
@@ -76,21 +63,3 @@ const Header = () => (
     </div>
   </div>
 );
-
-const CONTACT_DATA = [
-  {
-    text: "WA",
-    link: "https://wa.me/+62895603404421",
-    icon: <FaWhatsapp />,
-  },
-  {
-    text: "IG",
-    link: "https://www.instagram.com/farkhan.azmi/",
-    icon: <FaInstagram />,
-  },
-  {
-    text: "LI",
-    link: "https://www.linkedin.com/in/farkhanazmi/",
-    icon: <FaLinkedin />,
-  },
-];
