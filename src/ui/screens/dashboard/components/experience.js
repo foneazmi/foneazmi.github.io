@@ -9,12 +9,7 @@ export const Experience = () => (
 
 const ExperienceItem = ({ role, company, date, location, image }) => (
   <div className="flex flex-row mt-4">
-    <img
-      className="h-14 w-14 object-scale-down bg-cyan-200"
-      src={image}
-      alt="image_company"
-    />
-    <div className="ml-4">
+    <div>
       <p className="antialiased text-white text-base font-black">{role}</p>
       <p className="antialiased text-white text-sm font-semibold">{company}</p>
       <p className="antialiased italic hover:not-italic text-white text-xs font-extralight">

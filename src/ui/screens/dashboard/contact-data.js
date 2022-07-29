@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaWhatsapp, FaLinkedin, FaGithub, FaTelegram } from "react-icons/fa";
 export const CONTACT_DATA = [
   {
     text: "WA",
@@ -14,5 +14,10 @@ export const CONTACT_DATA = [
     text: "GH",
     link: "https://github.com/foneazmi",
     icon: <FaGithub />,
+  },
+  {
+    text: "Telegram",
+    link: "https://t.me/foneazmi",
+    icon: <FaTelegram />,
   },
 ];
