@@ -1,4 +1,4 @@
-import { DashboardScreen, WIPScreen } from "./ui/screens";
+import { DashboardScreen, PoopScreen } from "./ui/screens";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Sidebar } from "./ui/components";
 import "./App.css";
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Sidebar />
         <Routes>
-          <Route path="/wip" element={<WIPScreen />} />
+          <Route path="/poop" element={<PoopScreen />} />
           <Route path="/" element={<DashboardScreen />} />
         </Routes>
       </Router>

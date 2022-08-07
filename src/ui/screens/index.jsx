@@ -1,2 +1,2 @@
 export * from "./dashboard";
-export * from "./wip";
+export * from "./poop";

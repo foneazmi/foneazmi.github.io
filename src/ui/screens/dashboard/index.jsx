@@ -5,7 +5,7 @@ export const DashboardScreen = () => {
   return (
     <div className="flex min-h-screen select-none">
       <div className="h-full w-full ml-16">
-        <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-9/12 w-full mt-4 pb-4">
+        <div className="md:mx-auto xl:w-4/12 lg:w-6/12  md:w-8/12 w-full mt-4 pb-4">
           <Profile />
           <Body />
         </div>
