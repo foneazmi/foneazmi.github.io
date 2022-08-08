@@ -92,6 +92,10 @@ const Navbar = () => (
         >
           <MenuIcon className="h-6 w-6 text-primary" />
         </label>
+        <div class="font-black text-primary inline-flex text-lg">
+          <span class="text-primary">Kh</span>
+          <span class="text-base-content">an</span>
+        </div>
       </div>
       <div class="flex-0">
         <div title="Change Theme" class="dropdown dropdown-end ">
