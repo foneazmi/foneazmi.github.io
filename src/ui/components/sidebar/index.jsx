@@ -58,23 +58,23 @@ const ThemeItem = ({ theme }) => {
   const dispatch = useDispatch();
   return (
     <div
-      class="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2"
+      className="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2"
       data-set-theme={theme}
       data-act-class="outline"
       onClick={() => dispatch(setTheme(theme))}
     >
       <div
         data-theme={theme}
-        class="bg-base-100 text-base-content w-full cursor-pointer font-sans"
+        className="bg-base-100 text-base-content w-full cursor-pointer font-sans"
       >
-        <div class="grid grid-cols-5 grid-rows-3">
-          <div class="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
-            <div class="flex-grow text-sm font-bold">{theme}</div>
-            <div class="flex flex-shrink-0 flex-wrap gap-1">
-              <div class="bg-primary w-2 rounded"></div>
-              <div class="bg-secondary w-2 rounded"></div>
-              <div class="bg-accent w-2 rounded"></div>
-              <div class="bg-neutral w-2 rounded"></div>
+        <div className="grid grid-cols-5 grid-rows-3">
+          <div className="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
+            <div className="flex-grow text-sm font-bold">{theme}</div>
+            <div className="flex flex-shrink-0 flex-wrap gap-1">
+              <div className="bg-primary w-2 rounded"></div>
+              <div className="bg-secondary w-2 rounded"></div>
+              <div className="bg-accent w-2 rounded"></div>
+              <div className="bg-neutral w-2 rounded"></div>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@ const ThemeItem = ({ theme }) => {
 };
 const Navbar = () => (
   <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 text-primary-content">
-    <nav class="navbar w-full">
+    <nav className="navbar w-full">
       <div className="flex flex-1">
         <label
           htmlFor="my-drawer-3"
@@ -92,20 +92,20 @@ const Navbar = () => (
         >
           <MenuIcon className="h-6 w-6 text-primary" />
         </label>
-        <div class="font-black text-primary inline-flex text-lg">
-          <span class="text-primary">Kh</span>
-          <span class="text-base-content">an</span>
+        <div className="font-black text-primary inline-flex text-lg">
+          <span className="text-primary">Kh</span>
+          <span className="text-base-content">an</span>
         </div>
       </div>
-      <div class="flex-0">
-        <div title="Change Theme" class="dropdown dropdown-end ">
-          <div tabindex="0" class="btn gap-1 normal-case btn-ghost">
+      <div className="flex-0">
+        <div title="Change Theme" className="dropdown dropdown-end ">
+          <div tabIndex="0" className="btn gap-1 normal-case btn-ghost">
             <SparklesIcon className="inline-block h-5 w-5 text-primary stroke-current md:h-6 md:w-6" />
-            <span class="hidden md:inline text-primary">Theme</span>
+            <span className="hidden md:inline text-primary">Theme</span>
             <ChevronDownIcon className="ml-1 hidden h-3 w-3 fill-current opacity-60 sm:inline-block" />
           </div>
-          <div class="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16">
-            <div class="grid grid-cols-1 gap-3 p-3" tabindex="0">
+          <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16">
+            <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
               {THEME.map((element, index) => (
                 <ThemeItem theme={element} key={`${index}-theme`} />
               ))}
