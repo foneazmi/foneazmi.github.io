@@ -1,19 +1,20 @@
-import { DashboardScreen, PoopScreen } from "./ui/screens";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Sidebar } from "./ui/components";
-import "./App.css";
-
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { store, persistor } from "./stores";
+import { RouteApp } from "./routes";
 function App() {
   return (
-    <div className="bg-gray-800">
-      <Router>
-        <Sidebar />
-        <Routes>
-          <Route path="/poop" element={<PoopScreen />} />
-          <Route path="/" element={<DashboardScreen />} />
-        </Routes>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <RouteApp />
+        {/* <div data-theme={theme}>
+          <Router>
+            <Loader />
+            <Sidebar content={<Routes />} />
+          </Router>
+        </div> */}
+      </PersistGate>
+    </Provider>
   );
 }
 
