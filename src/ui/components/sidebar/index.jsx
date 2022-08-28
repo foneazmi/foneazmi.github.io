@@ -6,8 +6,9 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/solid";
 import { FaUserCircle, FaPoo } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
+import { THEME } from "../../../helpers";
 
 const SIDEBAR_DATA = [
   {
@@ -20,38 +21,6 @@ const SIDEBAR_DATA = [
     link: "/poop",
     icon: <FaPoo size={18} />,
   },
-];
-
-const THEME = [
-  "light",
-  "dark",
-  "cupcake",
-  "bumblebee",
-  "emerald",
-  "corporate",
-  "synthwave",
-  "retro",
-  "cyberpunk",
-  "valentine",
-  "halloween",
-  "garden",
-  "forest",
-  "aqua",
-  "lofi",
-  "pastel",
-  "fantasy",
-  "wireframe",
-  "black",
-  "luxury",
-  "dracula",
-  "cmyk",
-  "autumn",
-  "business",
-  "acid",
-  "lemonade",
-  "night",
-  "coffee",
-  "winter",
 ];
 
 const ThemeItem = ({ theme }) => {

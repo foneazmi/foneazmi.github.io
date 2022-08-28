@@ -2,6 +2,9 @@ import { getExperienceYear } from "../../../helpers";
 import { Experience } from "./components";
 import { useSelector, useDispatch } from "react-redux";
 import { CONTACT_DATA } from "./contact-data";
+import profile from "../../../assets/images/profile.webp";
+import { photoStyle } from "../../../helpers";
+
 export const DashboardScreen = () => {
   return (
     <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-10/12 w-full mt-4 pb-4">
@@ -33,12 +36,8 @@ const Profile = () => {
   return (
     <div className="flex flex-col md:flex-row mx-4">
       <div className="avatar">
-        <div
-          className={`h-28 w-28 md:w-32 md:h-32 ${
-            theme !== "cyberpunk" ? "mask mask-squircle" : ""
-          }`}
-        >
-          <img src="https://avatars.githubusercontent.com/u/26783512" alt="" />
+        <div className={`h-28 w-28 md:w-32 md:h-32 ${photoStyle[theme]}`}>
+          <img src={profile} alt="" />
         </div>
       </div>
       <div className="md:ml-4 md:mt-0 ml-0 mt-4 flex flex-col">
