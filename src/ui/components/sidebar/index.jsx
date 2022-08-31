@@ -5,7 +5,7 @@ import {
   SparklesIcon,
   ChevronDownIcon,
 } from "@heroicons/react/solid";
-import { FaUserCircle, FaPoo } from "react-icons/fa";
+import { FaUserCircle, FaVestPatches } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
@@ -19,7 +19,7 @@ const SIDEBAR_DATA = [
   {
     text: "#ComingSoon🦄",
     link: "/coming-soon",
-    icon: <FaPoo size={18} />,
+    icon: <FaVestPatches size={18} />,
   },
 ];
 
