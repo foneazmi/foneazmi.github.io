@@ -1,2 +1,2 @@
 export * from "./dashboard";
-export * from "./poop";
+export * from "./coming-soon";

@@ -28,13 +28,13 @@ const ExperienceItem = ({ role, company, date, location }) => (
 
 const EXPERIENCE_DATA = [
   {
-    role: "Mobile Developer",
+    role: "Software Engineer",
     company: "PT Appfuxion Consulting Indonesia",
     date: "Dec 2021 - Present",
     location: "Jakarta, Indonesia (Remote)",
   },
   {
-    role: "Frontend Mobile Developer",
+    role: "Senior Frontend Mobile Developer",
     company: "GENESYS Application Indonesia",
     date: "Mar 2021 - Dec 2021",
     location: "Jakarta, Indonesia (Remote)",
