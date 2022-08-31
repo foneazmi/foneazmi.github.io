@@ -17,8 +17,8 @@ const SIDEBAR_DATA = [
     icon: <FaUserCircle size={18} />,
   },
   {
-    text: "Poop 💩",
-    link: "/poop",
+    text: "#ComingSoon🦄",
+    link: "/coming-soon",
     icon: <FaPoo size={18} />,
   },
 ];
