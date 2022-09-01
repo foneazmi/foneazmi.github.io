@@ -22,27 +22,25 @@ const Portfolio = () => (
 
 const Body = () => (
   <div className="flex flex-col mx-4">
+    <GithubActivity />
     <div className="divider" />
     <Experience />
     <div className="divider" />
     <Portfolio />
-    {/* <div className="divider" /> */}
-    {/* <GithubActivity /> */}
   </div>
 );
 
-// const GithubActivity = () => {
-//   const { theme } = useSelector(({ global }) => global);
-//   return (
-//     <div className="mb-10">
-//       <p className=" text-xl">Github Activity</p>
-//       <img
-//         src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
-//         alt="my-github-activity"
-//       />
-//     </div>
-//   );
-// };
+const GithubActivity = () => {
+  const { theme } = useSelector(({ global }) => global);
+  return (
+    <div className="mt-4">
+      <img
+        src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
+        alt="my-github-activity"
+      />
+    </div>
+  );
+};
 
 const Profile = () => {
   const { theme } = useSelector(({ global }) => global);
@@ -73,10 +71,6 @@ const Profile = () => {
             </a>
           ))}
         </div>
-        <img
-          src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
-          alt="my-github-activity"
-        />
       </div>
     </div>
   );
