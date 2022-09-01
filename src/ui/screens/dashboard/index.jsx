@@ -26,23 +26,23 @@ const Body = () => (
     <Experience />
     <div className="divider" />
     <Portfolio />
-    <div className="divider" />
-    <GithubActivity />
+    {/* <div className="divider" /> */}
+    {/* <GithubActivity /> */}
   </div>
 );
 
-const GithubActivity = () => {
-  const { theme } = useSelector(({ global }) => global);
-  return (
-    <div className="mb-10">
-      <p className=" text-xl">Github Activity</p>
-      <img
-        src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
-        alt="my-github-activity"
-      />
-    </div>
-  );
-};
+// const GithubActivity = () => {
+//   const { theme } = useSelector(({ global }) => global);
+//   return (
+//     <div className="mb-10">
+//       <p className=" text-xl">Github Activity</p>
+//       <img
+//         src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
+//         alt="my-github-activity"
+//       />
+//     </div>
+//   );
+// };
 
 const Profile = () => {
   const { theme } = useSelector(({ global }) => global);
@@ -73,6 +73,10 @@ const Profile = () => {
             </a>
           ))}
         </div>
+        <img
+          src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
+          alt="my-github-activity"
+        />
       </div>
     </div>
   );
