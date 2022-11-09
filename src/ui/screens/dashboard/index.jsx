@@ -3,7 +3,7 @@ import { Experience } from "./components";
 import { useSelector } from "react-redux";
 import { CONTACT_DATA } from "./contact-data";
 import profile from "../../../assets/images/profile.webp";
-import { photoStyle, colorHexTheme } from "../../../helpers";
+import { photoStyle } from "../../../helpers";
 
 export const DashboardScreen = () => {
   return (
@@ -22,25 +22,12 @@ const Portfolio = () => (
 
 const Body = () => (
   <div className="flex flex-col mx-4">
-    <GithubActivity />
     <div className="divider" />
     <Experience />
     <div className="divider" />
     <Portfolio />
   </div>
 );
-
-const GithubActivity = () => {
-  const { theme } = useSelector(({ global }) => global);
-  return (
-    <div className="mt-4">
-      <img
-        src={`https://ghchart.rshah.org/${colorHexTheme[theme]}/foneazmi`}
-        alt="my-github-activity"
-      />
-    </div>
-  );
-};
 
 const Profile = () => {
   const { theme } = useSelector(({ global }) => global);
