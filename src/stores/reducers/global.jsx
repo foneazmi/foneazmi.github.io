@@ -2,7 +2,7 @@ import { BEGIN, END, LOGOUT, THEME } from "../types";
 
 const INITIAL_STATE = {
   loading: false,
-  theme: "cyberpunk",
+  theme: "night",
 };
 
 export const global = (state = INITIAL_STATE, action) => {

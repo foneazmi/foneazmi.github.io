@@ -1,27 +1,9 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import {
-  MenuIcon,
-  SparklesIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/solid";
-import { FaUserCircle, FaVestPatches } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import { FaHamburger, FaSwatchbook, FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
-
-const SIDEBAR_DATA = [
-  {
-    text: "Farkhan Azmi",
-    link: "/",
-    icon: <FaUserCircle size={18} />,
-  },
-  {
-    text: "#ComingSoon🦄",
-    link: "/coming-soon",
-    icon: <FaVestPatches size={18} />,
-  },
-];
+import { SIDEBAR_DATA } from "../../../routes";
 
 const ThemeItem = ({ theme }) => {
   const dispatch = useDispatch();
@@ -59,7 +41,7 @@ const Navbar = () => (
           htmlFor="my-drawer-3"
           className="btn btn-square btn-ghost lg:hidden"
         >
-          <MenuIcon className="h-6 w-6 text-primary" />
+          <FaHamburger className="h-5 w-5 text-primary" />
         </label>
         <div className="font-black text-primary inline-flex text-lg">
           <span className="text-primary">Kh</span>
@@ -69,9 +51,9 @@ const Navbar = () => (
       <div className="flex-0">
         <div title="Change Theme" className="dropdown dropdown-end ">
           <div tabIndex="0" className="btn gap-1 normal-case btn-ghost">
-            <SparklesIcon className="inline-block h-5 w-5 text-primary stroke-current md:h-6 md:w-6" />
+            <FaSwatchbook className="inline-block h-4 w-4 text-primary stroke-current md:h-5 md:w-5" />
             <span className="hidden md:inline text-primary">Theme</span>
-            <ChevronDownIcon className="ml-1 hidden h-3 w-3 fill-current opacity-60 sm:inline-block" />
+            <FaChevronDown className="ml-1 hidden h-3 w-3 fill-current text-primary sm:inline-block" />
           </div>
           <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16">
             <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
@@ -87,7 +69,7 @@ const Navbar = () => (
 );
 
 export const Sidebar = ({ content }) => {
-  const [selected, setSelected] = useState(0);
+  const location = useLocation();
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -102,8 +84,7 @@ export const Sidebar = ({ content }) => {
             <SideBarIcon
               key={`${index}-sidebar`}
               {...element}
-              active={index === selected}
-              onClick={() => setSelected(index)}
+              active={element.link === location.pathname}
               sideText={element.badge}
             />
           ))}

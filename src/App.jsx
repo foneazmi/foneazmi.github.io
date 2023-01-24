@@ -7,12 +7,6 @@ function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
         <RouteApp />
-        {/* <div data-theme={theme}>
-          <Router>
-            <Loader />
-            <Sidebar content={<Routes />} />
-          </Router>
-        </div> */}
       </PersistGate>
     </Provider>
   );
