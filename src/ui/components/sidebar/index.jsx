@@ -68,7 +68,18 @@ const Navbar = () => (
   </div>
 );
 
-export const Sidebar = ({ content }) => {
+const Footer = () => {
+  const date = new Date();
+  return (
+    <footer className="absolute w-full bottom-0 p-4 bg-base-300 text-base-content">
+      <p className="text-sm">
+        {`Copyright © ${date.getFullYear()} - Farkhan Azmi`}
+      </p>
+    </footer>
+  );
+};
+
+export const Layout = ({ content }) => {
   const location = useLocation();
   return (
     <div className="drawer drawer-mobile">
@@ -76,15 +87,18 @@ export const Sidebar = ({ content }) => {
       <div className="drawer-content flex flex-col">
         <Navbar />
         {content}
+        <Footer />
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
           {SIDEBAR_DATA.map((element, index) => (
-            <SideBarIcon
+            <SidebarItem
               key={`${index}-sidebar`}
-              {...element}
-              active={element.link === location.pathname}
+              path={element.path}
+              icon={element.icon}
+              text={element.text}
+              active={element.path === location.pathname}
               sideText={element.badge}
             />
           ))}
@@ -94,10 +108,10 @@ export const Sidebar = ({ content }) => {
   );
 };
 
-const SideBarIcon = (props) => (
-  <li onClick={props.onClick} className="btn-md">
+const SidebarItem = (props) => (
+  <li className="btn-md">
     <Link
-      to={props.link}
+      to={props.path}
       id="active-menu"
       className={`flex ${props.active ? "active" : ""}`}
     >

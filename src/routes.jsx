@@ -1,7 +1,6 @@
 import { DashboardScreen, ComingSoonScreen } from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import { Sidebar, Loader } from "./ui/components";
-import "./App.css";
+import { Layout, Loader } from "./ui/components";
 import { useSelector } from "react-redux";
 import {
   FaRegLaughWink,
@@ -12,27 +11,31 @@ import {
 export const SIDEBAR_DATA = [
   {
     text: "Farkhan Azmi",
-    link: "/",
+    path: "/",
+    badge: "#",
     icon: <FaRegLaughWink size={18} />,
+    element: <DashboardScreen />,
   },
   {
     text: "Portfolio",
-    link: "/portfolio",
+    path: "/portfolio",
     icon: <FaRegObjectGroup size={18} />,
+    element: <ComingSoonScreen />,
   },
   {
     text: "#ComingSoon🦄",
-    link: "/coming-soon",
+    path: "/coming-soon",
     icon: <FaVestPatches size={18} />,
+    element: <ComingSoonScreen />,
   },
 ];
 
 const RouterApp = () => {
   return (
     <Routes>
-      <Route path="/coming-soon" element={<ComingSoonScreen />} />
-      <Route path="/portfolio" element={<ComingSoonScreen />} />
-      <Route path="/" element={<DashboardScreen />} />
+      {SIDEBAR_DATA.map((sidebar) => (
+        <Route path={sidebar.path} element={sidebar.element} />
+      ))}
     </Routes>
   );
 };
@@ -43,7 +46,7 @@ export const RouteApp = () => {
     <div data-theme={theme}>
       <Router>
         <Loader />
-        <Sidebar content={<RouterApp />} />
+        <Layout content={<RouterApp />} />
       </Router>
     </div>
   );
