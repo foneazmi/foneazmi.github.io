@@ -115,11 +115,7 @@ export const Layout = ({ content }) => {
 
 const SidebarItem = (props) => (
   <li className="btn-md">
-    <Link
-      to={props.path}
-      id="active-menu"
-      className={`flex ${props.active ? "active" : ""}`}
-    >
+    <Link to={props.path} className={`flex ${props.active ? "active" : ""}`}>
       {props.icon}
       <span className="flex-1">{props.text}</span>
       {props.sideText && (
