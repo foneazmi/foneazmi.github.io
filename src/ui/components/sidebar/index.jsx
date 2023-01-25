@@ -83,7 +83,12 @@ export const Layout = ({ content }) => {
   const location = useLocation();
   return (
     <div className="drawer drawer-mobile">
-      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+      <input
+        id="my-drawer-3"
+        type="checkbox"
+        className="drawer-toggle"
+        aria-label="Hamburger-menu"
+      />
       <div className="drawer-content flex flex-col">
         <Navbar />
         {content}

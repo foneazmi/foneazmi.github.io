@@ -33,8 +33,12 @@ export const SIDEBAR_DATA = [
 const RouterApp = () => {
   return (
     <Routes>
-      {SIDEBAR_DATA.map((sidebar) => (
-        <Route path={sidebar.path} element={sidebar.element} />
+      {SIDEBAR_DATA.map((sidebar, index) => (
+        <Route
+          key={`${index}-sidebar`}
+          path={sidebar.path}
+          element={sidebar.element}
+        />
       ))}
     </Routes>
   );
