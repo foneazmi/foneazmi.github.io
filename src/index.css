@@ -15,12 +15,14 @@ code {
 .centered {
   height: 100vh;
   display: flex;
+  background-color: black;
   justify-content: center;
   align-items: center;
 }
 
 .bounce {
   font-size: 40px;
+  color: white;
   animation: bounce 1s infinite;
 }
 
