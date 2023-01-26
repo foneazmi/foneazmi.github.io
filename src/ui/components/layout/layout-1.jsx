@@ -3,7 +3,7 @@ import { FaHamburger, FaSwatchbook, FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
-import { SIDEBAR_DATA } from "../../../routes";
+import { SIDE_MENU } from "../../../routes";
 
 const ThemeItem = ({ theme }) => {
   const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const Footer = () => {
   );
 };
 
-export const Layout = ({ content }) => {
+export const Layout1 = ({ content, sidebar }) => {
   const location = useLocation();
   return (
     <div className="drawer drawer-mobile">
@@ -97,7 +97,7 @@ export const Layout = ({ content }) => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
-          {SIDEBAR_DATA.map((element, index) => (
+          {SIDE_MENU.map((element, index) => (
             <SidebarItem
               key={`${index}-sidebar`}
               path={element.path}

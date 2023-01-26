@@ -1,4 +1,9 @@
-import { DashboardScreen, ComingSoonScreen } from "./ui/screens";
+import {
+  DashboardScreen,
+  ComingSoonScreen,
+  CakeLandingScreen,
+  CakePrivacyPolicyScreen,
+} from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Layout, Loader } from "./ui/components";
 import { useSelector } from "react-redux";
@@ -8,36 +13,50 @@ import {
   FaRegObjectGroup,
 } from "react-icons/fa";
 
-export const SIDEBAR_DATA = [
+export const OTHER_ROUTE = [
+  {
+    path: "/cake/privacy-policy",
+    element: <CakePrivacyPolicyScreen />,
+  },
+  {
+    path: "/cake",
+    element: <CakeLandingScreen />,
+  },
+];
+
+export const SIDE_MENU = [
   {
     text: "Farkhan Azmi",
     path: "/",
     badge: "#",
     icon: <FaRegLaughWink size={18} />,
     element: <DashboardScreen />,
+    mode: "layout-1",
   },
   {
     text: "Portfolio",
     path: "/portfolio",
     icon: <FaRegObjectGroup size={18} />,
     element: <ComingSoonScreen />,
+    mode: "layout-1",
   },
   {
     text: "#ComingSoon🦄",
     path: "/coming-soon",
     icon: <FaVestPatches size={18} />,
     element: <ComingSoonScreen />,
+    mode: "layout-1",
   },
 ];
 
 const RouterApp = () => {
   return (
     <Routes>
-      {SIDEBAR_DATA.map((sidebar, index) => (
+      {OTHER_ROUTE.concat(SIDE_MENU).map((route) => (
         <Route
-          key={`${index}-sidebar`}
-          path={sidebar.path}
-          element={sidebar.element}
+          key={`${route.path}-sidebar`}
+          path={route.path}
+          element={<Layout content={route.element} mode={route?.mode} />}
         />
       ))}
     </Routes>
@@ -50,7 +69,7 @@ export const RouteApp = () => {
     <div data-theme={theme}>
       <Router>
         <Loader />
-        <Layout content={<RouterApp />} />
+        <RouterApp />
       </Router>
     </div>
   );
