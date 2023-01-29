@@ -26,10 +26,18 @@ export const CakePrivacyPolicyScreen = () => {
       </p>
       <h1 className="font-bold mt-4">Information Collection and Use</h1>
       <p>
-        For a better experience, while using our Service, I may require you to
-        provide us with certain personally identifiable information. The
-        information that I request will be retained on your device and is not
-        collected by me in any way.
+        We are committed to protecting the privacy of our users. In order to
+        provide our services, we may collect device identification information
+        (such as device ID) when you use our products or services. We use this
+        information to improve our products and services, and to better
+        understand how they are used.
+      </p>
+      <p>
+        We will not share or sell your device ID or any other personal
+        information to any third party without your explicit consent, except as
+        required by law. We will also take reasonable steps to protect the
+        security of your device ID and other personal information, including
+        implementing appropriate technical and organizational measures.
       </p>
       <h1 className="font-bold mt-4">Log Data</h1>
       <p>
@@ -113,7 +121,7 @@ export const CakePrivacyPolicyScreen = () => {
         to review this page periodically for any changes. I will notify you of
         any changes by posting the new Privacy Policy on this page.
       </p>
-      <p>This policy is effective as of 2023-01-01</p>
+      <p>This policy is effective as of 29-01-2023</p>
       <h1 className="font-bold mt-4">Contact Us</h1>
       <p>
         If you have any questions or suggestions about my Privacy Policy, do not
