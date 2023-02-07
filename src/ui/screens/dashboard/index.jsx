@@ -12,12 +12,6 @@ export const DashboardScreen = () => {
     </div>
   );
 };
-const Portfolio = () => (
-  <div>
-    <p className=" text-xl">Portfolio</p>
-    <p className=" text-xs">Coming Soon</p>
-  </div>
-);
 
 const Body = () => (
   <div className="flex flex-col mx-4">
