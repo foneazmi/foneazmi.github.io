@@ -26,26 +26,26 @@ export const OTHER_ROUTE = [
 
 export const SIDE_MENU = [
   {
-    text: "Farkhan Azmi",
+    text: "Me",
     path: "/",
     badge: "#",
     icon: <FaRegLaughWink size={18} />,
     element: <DashboardScreen />,
-    mode: "layout-1",
+    sidebar: true,
   },
   {
     text: "Portfolio",
     path: "/portfolio",
     icon: <FaRegObjectGroup size={18} />,
     element: <ComingSoonScreen />,
-    mode: "layout-1",
+    sidebar: true,
   },
   {
-    text: "#ComingSoon🦄",
+    text: "#WIP🦄",
     path: "/coming-soon",
     icon: <FaVestPatches size={18} />,
     element: <ComingSoonScreen />,
-    mode: "layout-1",
+    sidebar: true,
   },
 ];
 
@@ -56,7 +56,7 @@ const RouterApp = () => {
         <Route
           key={`${route.path}-sidebar`}
           path={route.path}
-          element={<Layout content={route.element} mode={route?.mode} />}
+          element={route.element}
         />
       ))}
     </Routes>
@@ -69,7 +69,7 @@ export const RouteApp = () => {
     <div data-theme={theme}>
       <Router>
         <Loader />
-        <RouterApp />
+        <Layout content={<RouterApp />} />
       </Router>
     </div>
   );

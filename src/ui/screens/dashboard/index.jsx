@@ -6,14 +6,14 @@ import { photoStyle } from "../../../helpers";
 
 export const DashboardScreen = () => {
   return (
-    <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-10/12 w-full mt-4 pb-4">
+    <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-10/12 w-full py-10">
       <Profile />
       <Body />
     </div>
   );
 };
 const Portfolio = () => (
-  <div className="mb-10">
+  <div>
     <p className=" text-xl">Portfolio</p>
     <p className=" text-xs">Coming Soon</p>
   </div>
@@ -23,8 +23,6 @@ const Body = () => (
   <div className="flex flex-col mx-4">
     <div className="divider" />
     <Experience />
-    <div className="divider" />
-    <Portfolio />
   </div>
 );
 

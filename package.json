@@ -7,7 +7,7 @@
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "vite build",
+    "build": "NODE_ENV=production vite build",
     "preview": "vite preview",
     "predeploy": "yarn build"
   },
@@ -32,6 +32,7 @@
     "gh-pages": "^5.0.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
-    "vite": "^4.0.4"
+    "vite": "^4.0.4",
+    "vite-plugin-minify": "^1.5.2"
   }
 }
