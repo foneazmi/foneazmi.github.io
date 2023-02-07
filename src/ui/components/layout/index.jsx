@@ -7,7 +7,7 @@ import { SIDE_MENU } from "../../../routes";
 
 const FAB = () => {
   return (
-    <div className="dropdown dropdown-left dropdown-end absolute bottom-24 md:bottom-4 right-4">
+    <div className="dropdown dropdown-left dropdown-end fixed bottom-24 md:bottom-4 right-4">
       <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
         <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current md:h-5 md:w-5" />
       </label>
@@ -35,7 +35,7 @@ export const Layout = ({ content }) => {
 const Navbar = () => {
   const location = useLocation();
   return (
-    <div className="md:h-screen md:w-24 h-20 w-screen bg-base-300 flex justify-center md:flex-col flex-row items-center md:relative absolute bottom-0 left-0 right-0">
+    <div className="md:h-screen md:w-24 h-20 w-screen bg-base-300 flex justify-center md:flex-col flex-row items-center md:relative fixed bottom-0">
       {SIDE_MENU.map((element, index) => (
         <NavbarItem
           key={`${index}-sidebar`}
