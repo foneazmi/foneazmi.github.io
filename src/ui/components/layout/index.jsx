@@ -26,7 +26,7 @@ export const Layout = ({ content }) => {
   return (
     <div className="flex h-screen">
       <Navbar />
-      <div className="overflow-auto mb-20 md:mb-0 flex-1">{content}</div>
+      <div className="overflow-y-auto pb-20 md:pb-0 flex-1">{content}</div>
       <FAB />
     </div>
   );
