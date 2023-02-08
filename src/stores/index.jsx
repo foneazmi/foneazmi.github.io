@@ -5,12 +5,21 @@ import { global } from "./reducers";
 import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit";
 import { loggerMiddleware } from "./middleware";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 
 const reducer = combineReducers({
   global: persistReducer(
     {
       key: "global",
       storage,
+      transforms: [
+        encryptTransform({
+          secretKey: "ini apa",
+          onError: function (error) {
+            console.log(error);
+          },
+        }),
+      ],
     },
     global
   ),

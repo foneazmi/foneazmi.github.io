@@ -2,7 +2,7 @@ import { BEGIN, END, LOGOUT, THEME } from "../types";
 
 const INITIAL_STATE = {
   loading: false,
-  theme: "night",
+  theme: "cupcake",
 };
 
 export const global = (state = INITIAL_STATE, action) => {
