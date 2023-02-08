@@ -6,9 +6,11 @@ import { photoStyle } from "../../../helpers";
 
 export const DashboardScreen = () => {
   return (
-    <div className="md:mx-auto xl:w-6/12 lg:w-8/12  md:w-10/12 w-full py-10">
-      <Profile />
-      <Body />
+    <div className="overflow-y-auto h-full justify-center items-center flex">
+      <div className="m-auto xl:w-6/12 lg:w-8/12 md:w-10/12 w-full py-10">
+        <Profile />
+        <Body />
+      </div>
     </div>
   );
 };

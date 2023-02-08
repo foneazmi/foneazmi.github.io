@@ -5,6 +5,16 @@ import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
 import { SIDE_MENU } from "../../../routes";
 
+export const Layout = ({ content }) => {
+  return (
+    <div className="flex h-screen">
+      <Navbar />
+      <div className="pb-20 md:pb-0 w-full">{content}</div>
+      <FAB />
+    </div>
+  );
+};
+
 const FAB = () => {
   return (
     <div className="dropdown dropdown-left dropdown-end fixed bottom-24 md:bottom-4 right-4">
@@ -18,16 +28,6 @@ const FAB = () => {
           ))}
         </div>
       </div>
-    </div>
-  );
-};
-
-export const Layout = ({ content }) => {
-  return (
-    <div className="flex h-screen">
-      <Navbar />
-      <div className="overflow-y-auto pb-20 md:pb-0 flex-1">{content}</div>
-      <FAB />
     </div>
   );
 };
