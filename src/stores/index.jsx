@@ -5,21 +5,22 @@ import { global } from "./reducers";
 import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit";
 import { loggerMiddleware } from "./middleware";
-import { encryptTransform } from "redux-persist-transform-encrypt";
-
+// import { encryptTransform } from "redux-persist-transform-encrypt";
+// const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 const reducer = combineReducers({
   global: persistReducer(
     {
       key: "global",
       storage,
-      transforms: [
-        encryptTransform({
-          secretKey: "ini apa",
-          onError: function (error) {
-            console.log(error);
-          },
-        }),
-      ],
+      blacklist: ["loading", "_persist"],
+      // transforms: [
+      //   encryptTransform({
+      //     secretKey: SECRET_KEY,
+      //     onError: function (error) {
+      //       console.log(error);
+      //     },
+      //   }),
+      // ],
     },
     global
   ),
