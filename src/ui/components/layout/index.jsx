@@ -4,22 +4,25 @@ import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
 import { SIDE_MENU } from "../../../routes";
+import { memo } from "react";
 
-export const Layout = ({ content }) => {
+export const Layout = memo(function Layout({ content }) {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-screen bg-base-300 fixed">
       <Navbar />
-      <div className="pb-20 md:pb-0 w-full">{content}</div>
+      <div className="pb-20 sm:pb-0 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
+        {content}
+      </div>
       <FAB />
     </div>
   );
-};
+});
 
-const FAB = () => {
+const FAB = memo(function FAB() {
   return (
-    <div className="dropdown dropdown-left dropdown-end fixed bottom-24 md:bottom-4 right-4">
+    <div className="dropdown dropdown-left dropdown-end fixed bottom-24 sm:bottom-4 right-4">
       <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
-        <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current md:h-5 md:w-5" />
+        <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current sm:h-5 sm:w-5" />
       </label>
       <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box h-52 w-52 overflow-y-auto shadow-2xl mt-16">
         <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
@@ -30,12 +33,12 @@ const FAB = () => {
       </div>
     </div>
   );
-};
+});
 
-const Navbar = () => {
+const Navbar = memo(function Navbar() {
   const location = useLocation();
   return (
-    <div className="md:h-screen md:w-24 h-20 w-screen bg-base-300 flex justify-center md:flex-col flex-row items-center md:relative fixed bottom-0">
+    <div className="sm:h-screen sm:w-24 h-20 w-screen bg-base-300 flex justify-center sm:flex-col flex-row items-center sm:relative fixed bottom-0">
       {SIDE_MENU.map((element, index) => (
         <NavbarItem
           key={`${index}-sidebar`}
@@ -48,9 +51,9 @@ const Navbar = () => {
       ))}
     </div>
   );
-};
+});
 
-const NavbarItem = (props) => {
+const NavbarItem = memo(function NavbarItem(props) {
   const iconStyle = props.active
     ? "bg-primary px-4 py-2 rounded-full text-primary-content"
     : "py-2 rounded-full text-base-content bg-blend-darken duration-500 transition-all group-hover:bg-primary group-hover:text-primary-content group-hover:px-4";
@@ -65,9 +68,9 @@ const NavbarItem = (props) => {
       </span>
     </Link>
   );
-};
+});
 
-const ThemeItem = ({ theme }) => {
+const ThemeItem = memo(function ThemeItem({ theme }) {
   const dispatch = useDispatch();
   return (
     <div
@@ -94,4 +97,4 @@ const ThemeItem = ({ theme }) => {
       </div>
     </div>
   );
-};
+});

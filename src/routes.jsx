@@ -3,6 +3,7 @@ import {
   ComingSoonScreen,
   CakeLandingScreen,
   CakePrivacyPolicyScreen,
+  PortfolioScreen,
 } from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Layout, Loader } from "./ui/components";
@@ -37,7 +38,7 @@ export const SIDE_MENU = [
     text: "Portfolio",
     path: "/portfolio",
     icon: <FaRegObjectGroup size={18} />,
-    element: <ComingSoonScreen />,
+    element: <PortfolioScreen />,
     sidebar: true,
   },
   {

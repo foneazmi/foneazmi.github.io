@@ -6,8 +6,8 @@ import { photoStyle } from "../../../helpers";
 
 export const DashboardScreen = () => {
   return (
-    <div className="overflow-y-auto h-full justify-center items-center flex">
-      <div className="m-auto xl:w-6/12 lg:w-8/12 md:w-10/12 w-full py-10">
+    <div className="overflow-y-auto h-full justify-center items-center flex scrollbar-hide">
+      <div className="m-auto xl:w-6/12 lg:w-8/12 sm:w-10/12 w-full py-10">
         <Profile />
         <Body />
       </div>
@@ -25,13 +25,13 @@ const Body = () => (
 const Profile = () => {
   const { theme } = useSelector(({ global }) => global);
   return (
-    <div className="flex flex-col md:flex-row mx-4">
+    <div className="flex flex-col sm:flex-row mx-4">
       <div className="avatar">
-        <div className={`h-28 w-28 md:w-32 md:h-32 ${photoStyle[theme]}`}>
+        <div className={`h-28 w-28 sm:w-32 sm:h-32 ${photoStyle[theme]}`}>
           <img src="https://avatars.githubusercontent.com/u/26783512" alt="" />
         </div>
       </div>
-      <div className="md:ml-4 md:mt-0 ml-0 mt-4 flex flex-col">
+      <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col">
         <h1 className="font-bold text-3xl ">Farkhan Azmi</h1>
         <h1 className="text-lg  font-mono">Software Engineer</h1>
         <h1 className=" text-xs">
@@ -46,7 +46,7 @@ const Profile = () => {
               key={`${index}-contact`}
               href={element.link}
               aria-label={`${element.text} ${element.link}`}
-              className="rounded-full  flex flex-row w-auto bg-primary text-primary-content p-2 mr-2 mt-2  items-center hover:bg-primary-focus transition-all ease-in-out duration-200"
+              className="rounded-full  flex flex-row w-auto bg-primary text-primary-content p-2 mr-2 mt-2  items-center hover:bg-primary-focus transition-all ease-in-out duration-300"
             >
               {element.icon}
             </a>
