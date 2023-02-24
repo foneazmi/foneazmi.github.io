@@ -8,9 +8,9 @@ import { memo } from "react";
 
 export const Layout = memo(function Layout({ content }) {
   return (
-    <div className="flex h-screen w-screen bg-base-300 fixed">
+    <div className="flex h-screen w-screen bg-base-300 flex-col-reverse sm:flex-row">
       <Navbar />
-      <div className="pb-44 sm:pb-0 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
+      <div className="flex-1 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
         {content}
       </div>
       <FAB />
@@ -38,7 +38,7 @@ const FAB = memo(function FAB() {
 const Navbar = memo(function Navbar() {
   const location = useLocation();
   return (
-    <div className="sm:h-screen sm:w-24 h-20 w-screen bg-base-300 flex justify-center sm:flex-col flex-row items-center sm:relative fixed bottom-0">
+    <div className="sm:h-screen sm:w-24 h-20 w-screen bg-base-300 flex justify-center sm:flex-col flex-row items-center sm:relative">
       {SIDE_MENU.map((element, index) => (
         <NavbarItem
           key={`${index}-sidebar`}
