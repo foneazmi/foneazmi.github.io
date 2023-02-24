@@ -10,7 +10,7 @@ export const Layout = memo(function Layout({ content }) {
   return (
     <div className="flex h-screen w-screen bg-base-300 fixed">
       <Navbar />
-      <div className="pb-20 sm:pb-0 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
+      <div className="pb-44 sm:pb-0 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
         {content}
       </div>
       <FAB />

@@ -34,7 +34,7 @@ const EXPERIENCE_DATA = [
     location: "Jakarta, Indonesia (Remote)",
   },
   {
-    role: "Senior Frontend Mobile Developer",
+    role: "Frontend Mobile Developer",
     company: "GENESYS Application Indonesia",
     date: "Mar 2021 - Dec 2021",
     location: "Jakarta, Indonesia (Remote)",
