@@ -17,4 +17,4 @@ export const PortfolioScreen = () => {
   );
 };
 
-const DATA = [1];
+const DATA = [1, 2];
