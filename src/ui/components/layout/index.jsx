@@ -6,7 +6,7 @@ import { THEME } from "../../../helpers";
 import { SIDE_MENU } from "../../../routes";
 import { memo } from "react";
 
-export const Layout = memo(function Layout({ content }) {
+export const Layout = memo(({ content }) => {
   return (
     <div className="flex h-screen w-screen bg-base-300 flex-col-reverse sm:flex-row">
       <Navbar />
@@ -18,7 +18,7 @@ export const Layout = memo(function Layout({ content }) {
   );
 });
 
-const FAB = memo(function FAB() {
+const FAB = memo(() => {
   return (
     <div className="dropdown dropdown-hover dropdown-end absolute top-4 right-4">
       <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
@@ -35,7 +35,7 @@ const FAB = memo(function FAB() {
   );
 });
 
-const Navbar = memo(function Navbar() {
+const Navbar = memo(() => {
   const location = useLocation();
   return (
     <div className="sm:h-screen sm:w-24 h-20 w-screen bg-base-300 flex justify-center sm:flex-col flex-row items-center sm:relative">
@@ -53,7 +53,7 @@ const Navbar = memo(function Navbar() {
   );
 });
 
-const NavbarItem = memo(function NavbarItem(props) {
+const NavbarItem = memo((props) => {
   const iconStyle = props.active
     ? "bg-primary px-4 py-2 rounded-full text-primary-content"
     : "py-2 rounded-full text-base-content bg-blend-darken duration-500 transition-all group-hover:bg-primary group-hover:text-primary-content group-hover:px-4";
@@ -70,7 +70,7 @@ const NavbarItem = memo(function NavbarItem(props) {
   );
 });
 
-const ThemeItem = memo(function ThemeItem({ theme }) {
+const ThemeItem = memo(({ theme }) => {
   const dispatch = useDispatch();
   return (
     <div

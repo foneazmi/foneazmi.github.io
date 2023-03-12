@@ -1,6 +1,6 @@
 export const CakeLandingScreen = () => {
   return (
-    <div className="p-4 font-black">
+    <div className="overflow-y-auto h-full scrollbar-hide p-6">
       <h1>#Cake Landing</h1>
     </div>
   );

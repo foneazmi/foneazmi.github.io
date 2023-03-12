@@ -1,6 +1,6 @@
 export const CakePrivacyPolicyScreen = () => {
   return (
-    <div className="p-4 overflow-auto mb-16">
+    <div className="overflow-y-auto h-full scrollbar-hide p-6">
       <h1 className="font-bold mt-4">Privacy Policy</h1>
       <p>
         Farkhan Azmi built the Cake (Catatan Keuangan) app as a Free app. This
