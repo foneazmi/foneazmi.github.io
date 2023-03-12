@@ -8,7 +8,7 @@ export const PortfolioScreen = () => {
               className="p-28 sm:p-32 m-2 bg-primary rounded-xl transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-primary-focus duration-300"
               key={`${data}-Portfolio`}
             >
-              <h1 className="text-primary-content">Coming Soon</h1>
+              <h1 className="text-primary-content">Coming Soon 🦄</h1>
             </div>
           );
         })}
@@ -17,4 +17,4 @@ export const PortfolioScreen = () => {
   );
 };
 
-const DATA = [1, ];
+const DATA = [1];
