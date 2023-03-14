@@ -1,3 +1,4 @@
+import React from "react";
 import {
   DashboardScreen,
   ComingSoonScreen,
@@ -14,6 +15,9 @@ import {
   FaRegObjectGroup,
 } from "react-icons/fa";
 
+//? if got error delete this
+const InvitationScreen = React.lazy(() => import("./module/invitation"));
+
 export const OTHER_ROUTE = [
   {
     path: "/cake/privacy-policy",
@@ -22,6 +26,11 @@ export const OTHER_ROUTE = [
   {
     path: "/cake",
     element: <CakeLandingScreen />,
+  },
+  //? if got error delete this
+  {
+    path: "/invitation",
+    element: <InvitationScreen />,
   },
 ];
 

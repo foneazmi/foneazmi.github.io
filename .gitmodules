@@ -1,0 +1,3 @@
+[submodule "src/module/invitation"]
+	path = src/module/invitation
+	url = git@github.com:foneazmi/invitation.git
