@@ -24,7 +24,7 @@ const FAB = memo(() => {
       <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
         <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current sm:h-5 sm:w-5" />
       </label>
-      <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box h-52 w-52 overflow-y-auto shadow-2xl scrollbar-hide mt-1">
+      <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box h-52 w-52 overflow-y-auto shadow-2xl scrollbar-hide">
         <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
           {THEME.map((element, index) => (
             <ThemeItem theme={element} key={`${index}-theme`} />
