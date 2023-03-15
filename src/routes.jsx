@@ -29,6 +29,14 @@ export const OTHER_ROUTE = [
   },
   //? if got error delete this
   {
+    path: "/wedding/gallery",
+    element: <InvitationScreen type={"gallery"} />,
+  },
+  {
+    path: "/wedding/bts",
+    element: <InvitationScreen type={"gallery-2"} />,
+  },
+  {
     path: "/invitation",
     element: <InvitationScreen />,
   },
