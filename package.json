@@ -12,18 +12,18 @@
     "predeploy": "yarn build"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.2",
-    "daisyui": "^2.50.1",
+    "@reduxjs/toolkit": "^1.9.3",
+    "daisyui": "^2.51.4",
     "firebase": "^9.17.2",
-    "framer-motion": "^10.3.0",
+    "framer-motion": "^10.3.4",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
+    "react-icons": "^4.8.0",
     "react-intersection-observer": "^9.4.3",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.9.0",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-persist-transform-encrypt": "^4.0.0",
@@ -33,11 +33,11 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.2.0",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.4.14",
     "gh-pages": "^5.0.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
-    "vite": "^4.1.2",
+    "vite": "^4.2.0",
     "vite-plugin-minify": "^1.5.2"
   }
 }
