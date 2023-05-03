@@ -12,31 +12,29 @@
     "predeploy": "yarn build"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.3",
-    "daisyui": "^2.51.5",
-    "firebase": "^9.18.0",
-    "framer-motion": "^10.8.5",
+    "@reduxjs/toolkit": "^1.9.5",
+    "daisyui": "^2.51.6",
+    "firebase": "^9.21.0",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-intersection-observer": "^9.4.3",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.9.0",
+    "react-router-dom": "^6.11.0",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react-swc": "^3.2.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "@vitejs/plugin-react-swc": "^3.3.0",
     "autoprefixer": "^10.4.14",
     "gh-pages": "^5.0.0",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.7",
-    "vite": "^4.2.1",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.4",
     "vite-plugin-minify": "^1.5.2"
   }
 }
