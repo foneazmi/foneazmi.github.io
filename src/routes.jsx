@@ -17,6 +17,7 @@ import {
 
 //? if got error delete this
 const InvitationScreen = React.lazy(() => import("./module/invitation"));
+const PlanetaryScreen = React.lazy(() => import("./module/planetary"));
 
 export const OTHER_ROUTE = [
   {
@@ -39,6 +40,12 @@ export const OTHER_ROUTE = [
   {
     path: "/invitation",
     element: <InvitationScreen />,
+  },
+
+  //? Planetary
+  {
+    path: "/planetary",
+    element: <PlanetaryScreen />,
   },
 ];
 
