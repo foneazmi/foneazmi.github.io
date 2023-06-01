@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "daisyui": "^2.51.6",
+    "daisyui": "^3.0.0",
     "firebase": "^9.22.1",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
