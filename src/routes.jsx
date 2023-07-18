@@ -1,19 +1,14 @@
 import React from "react";
 import {
   DashboardScreen,
-  ComingSoonScreen,
-  CakeLandingScreen,
+  // CakeLandingScreen,
   CakePrivacyPolicyScreen,
   PortfolioScreen,
 } from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Layout, Loader } from "./ui/components";
 import { useSelector } from "react-redux";
-import {
-  FaRegLaughWink,
-  FaVestPatches,
-  FaRegObjectGroup,
-} from "react-icons/fa";
+import { FaRegLaughWink, FaRegObjectGroup } from "react-icons/fa";
 
 //? if got error delete this
 const InvitationScreen = React.lazy(() => import("./module/invitation"));
@@ -24,10 +19,10 @@ export const OTHER_ROUTE = [
     path: "/cake/privacy-policy",
     element: <CakePrivacyPolicyScreen />,
   },
-  {
-    path: "/cake",
-    element: <CakeLandingScreen />,
-  },
+  // {
+  //   path: "/cake",
+  //   element: <CakeLandingScreen />,
+  // },
   //? if got error delete this
   {
     path: "/wedding/gallery",
@@ -63,13 +58,6 @@ export const SIDE_MENU = [
     path: "/portfolio",
     icon: <FaRegObjectGroup size={18} />,
     element: <PortfolioScreen />,
-    sidebar: true,
-  },
-  {
-    text: "#WIP🦄",
-    path: "/coming-soon",
-    icon: <FaVestPatches size={18} />,
-    element: <ComingSoonScreen />,
     sidebar: true,
   },
 ];
