@@ -7,10 +7,10 @@ export const PortfolioScreen = () => {
         {DATA.map((e, i) => (
           <div
             key={`${i}-portfolio`}
-            class="w-full sm:w-64 md:w-96 aspect-square rounded-lg overflow-hidden group transition ease-in-out delay-150 hover:-translate-y-1 bg-primary hover:bg-primary-focus duration-300"
+            class="w-full sm:w-64 md:w-96 aspect-square rounded-lg overflow-hidden group transition ease-in-out delay-150 hover:-translate-y-1 bg-secondary hover:bg-secondary-focus duration-300"
           >
             <img src={portfolioCake} alt="image" className=" w-full h-full" />
-            <div className="sticky bottom-0 bg-base-content h-20 p-4 flex items-center">
+            <div className="sticky bottom-0 bg-primary h-20 p-4 flex items-center">
               <div className="flex flex-col flex-1">
                 <h1 className="text-primary-content text-lg font-bold">Cake</h1>
                 <h1 className="text-primary-content text-xs">
@@ -33,11 +33,11 @@ export const PortfolioScreen = () => {
           </div>
         ))}
 
-        <div class="w-full sm:w-64 md:w-96 aspect-square rounded-lg overflow-hidden group transition ease-in-out delay-150 hover:-translate-y-1  bg-primary hover:bg-primary-focus duration-300">
+        <div class="w-full sm:w-64 md:w-96 aspect-square rounded-lg overflow-hidden group transition ease-in-out delay-150 hover:-translate-y-1  bg-secondary hover:bg-secondary-focus duration-300">
           <div className=" w-full h-full justify-center items-center flex">
             <h1 className="text-9xl">🦄</h1>
           </div>
-          <div className="sticky bottom-0 bg-base-content h-20 p-4 flex items-center">
+          <div className="sticky bottom-0 bg-primary h-20 p-4 flex items-center">
             <div className="flex flex-col flex-1">
               <h1 className="text-primary-content text-lg font-bold">
                 Cooming
