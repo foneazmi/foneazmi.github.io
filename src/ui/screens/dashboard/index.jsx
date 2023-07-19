@@ -46,7 +46,7 @@ const Profile = () => {
               key={`${index}-contact`}
               href={element.link}
               aria-label={`${element.text} ${element.link}`}
-              className="rounded-full  flex flex-row w-auto bg-primary text-primary-content p-2 mr-2 mt-2  items-center hover:bg-primary-focus transition-all ease-in-out duration-300"
+              className="rounded-full  flex flex-row w-auto bg-primary text-primary-content p-2 mr-2 mt-2  items-center hover:bg-primary-focus transition-all ease-in-out duration-300 hover:scale-110"
             >
               {element.icon}
             </a>
