@@ -11,15 +11,15 @@ jobs:
 
 steps:
   - name: Deploy Using ssh
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY_ED25519 }}
-        port: ${{ secrets.PORT }}
-      script: |
-        cd web/foneazmi.github.io
-        git pull origin master
-        git status
-        yarn
-        yarn build
+    uses: appleboy/ssh-action@master
+    with:
+      host: ${{ secrets.HOST }}
+      username: ${{ secrets.USERNAME }}
+      key: ${{ secrets.KEY_ED25519 }}
+      port: ${{ secrets.PORT }}
+    script: |
+      cd web/foneazmi.github.io
+      git pull origin master
+      git status
+      yarn
+      yarn build
