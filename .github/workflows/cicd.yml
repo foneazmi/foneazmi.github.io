@@ -34,9 +34,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY_ED25519 }}
           port: ${{ secrets.PORT }}
-        script:
-          - cd web/foneazmi.github.io
-          - git pull origin master
-          - git status
-          - yarn
-          - yarn build
+          script: |
+            cd web/foneazmi.github.io
+            git pull origin master
+            git status
+            yarn
+            yarn build
