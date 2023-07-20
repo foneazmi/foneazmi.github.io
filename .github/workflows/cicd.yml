@@ -9,9 +9,9 @@ on:
       - master
 
 jobs:
-  ci:
-    runs-on: ubuntu-latest
   build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
