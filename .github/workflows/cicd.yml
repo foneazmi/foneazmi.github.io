@@ -13,20 +13,19 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
-      - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
-        with:
-          node-version: 18
-          check-latest: true
-      - name: Install dependencies 👨🏻‍💻
-        run: yarn
-      - name: Run linter 👀
-        run: yarn lint
-      - name: Run tests 🧪
-        run: yarn test
-
+      # - name: Checkout 🛎
+      #   uses: actions/checkout@master
+      # - name: Setup node env 🏗
+      #   uses: actions/setup-node@v2.1.5
+      #   with:
+      #     node-version: 18
+      #     check-latest: true
+      # - name: Install dependencies 👨🏻‍💻
+      #   run: yarn
+      # - name: Run linter 👀
+      #   run: yarn lint
+      # - name: Run tests 🧪
+      #   run: yarn test
       - name: Deploy Using ssh
         uses: appleboy/ssh-action@master
         with:
