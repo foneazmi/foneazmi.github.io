@@ -1,0 +1,42 @@
+name: cicd
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+  build:
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 18
+          check-latest: true
+      - name: Install dependencies 👨🏻‍💻
+        run: yarn
+      - name: Run linter 👀
+        run: yarn lint
+      - name: Run tests 🧪
+        run: yarn test
+
+      - name: Deploy Using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY_ED25519 }}
+          port: ${{ secrets.PORT }}
+        script: |
+          cd web/foneazmi.github.io
+          git pull origin master
+          git status
+          yarn
+          yarn build
