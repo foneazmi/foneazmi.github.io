@@ -33,12 +33,11 @@ const Profile = () => {
       </div>
       <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col">
         <h1 className="font-bold text-3xl ">Farkhan Azmi</h1>
-        <h1 className="text-lg  font-mono">Software Engineer</h1>
+        <h1 className="text-lg font-mono">Software Engineer</h1>
         <h1 className=" text-xs">
           Talented software engineer with {getExperienceYear("2020")}+ years of
           work experience. who always try to challenge and learn some new
-          experiences, knowledge, and skills. Have the ability to work alone or
-          collaborate with a team.
+          experiences, knowledge, and skills.
         </h1>
         <div className="flex-row flex flex-wrap">
           {CONTACT_DATA.map((element, index) => (
