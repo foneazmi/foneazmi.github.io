@@ -1,7 +1,6 @@
 import React from "react";
 import {
   DashboardScreen,
-  // CakeLandingScreen,
   CakePrivacyPolicyScreen,
   PortfolioScreen,
 } from "./ui/screens";
@@ -10,37 +9,10 @@ import { Layout, Loader } from "./ui/components";
 import { useSelector } from "react-redux";
 import { FaRegLaughWink, FaRegObjectGroup } from "react-icons/fa";
 
-//? if got error delete this
-const InvitationScreen = React.lazy(() => import("./module/invitation"));
-const PlanetaryScreen = React.lazy(() => import("./module/planetary"));
-
 export const OTHER_ROUTE = [
   {
     path: "/cake/privacy-policy",
     element: <CakePrivacyPolicyScreen />,
-  },
-  // {
-  //   path: "/cake",
-  //   element: <CakeLandingScreen />,
-  // },
-  //? if got error delete this
-  {
-    path: "/wedding/gallery",
-    element: <InvitationScreen type={"gallery"} />,
-  },
-  {
-    path: "/wedding/bts",
-    element: <InvitationScreen type={"gallery-2"} />,
-  },
-  {
-    path: "/invitation",
-    element: <InvitationScreen />,
-  },
-
-  //? Planetary
-  {
-    path: "/planetary",
-    element: <PlanetaryScreen />,
   },
 ];
 

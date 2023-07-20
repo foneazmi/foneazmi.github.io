@@ -6,9 +6,6 @@ import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit";
 import { loggerMiddleware } from "./middleware";
 
-//? if got error delete this
-import { invitation } from "../module/invitation/stores/reducer";
-
 const reducer = combineReducers({
   global: persistReducer(
     {
@@ -18,9 +15,6 @@ const reducer = combineReducers({
     },
     global
   ),
-
-  //? if got error delete this
-  invitation,
 });
 
 export const store = configureStore({
