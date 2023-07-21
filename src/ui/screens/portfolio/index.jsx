@@ -47,7 +47,7 @@ const DATA = [
 ];
 
 const PortfolioItem = ({ image, title, description, link, icon, text }) => (
-  <div class="w-full sm:w-64 md:w-96 aspect-square rounded-lg bg-secondary overflow-hidden hover:scale-105 duration-300 select-none">
+  <div class="w-full sm:w-52 md:w-72 aspect-square rounded-lg bg-secondary overflow-hidden hover:scale-105 duration-300 select-none">
     {image ? (
       <img src={image} alt="image" className=" w-full h-full" />
     ) : (
@@ -72,7 +72,7 @@ const PortfolioItem = ({ image, title, description, link, icon, text }) => (
 export const PortfolioScreen = () => {
   return (
     <div className="overflow-y-auto scrollbar-hide p-4 h-full flex items-center">
-      <div className="flex flex-wrap justify-center m-auto gap-4">
+      <div className="flex flex-wrap justify-center m-auto gap-4 sm:gap-2 md:gap-4">
         {DATA.map((item, i) => (
           <PortfolioItem key={`${i}-portfolio-item`} {...item} />
         ))}

@@ -6,7 +6,7 @@ import { photoStyle } from "../../../helpers";
 
 export const DashboardScreen = () => {
   return (
-    <div className="overflow-y-auto h-full justify-center items-center flex scrollbar-hide">
+    <div className="overflow-y-auto h-full justify-center items-center flex scrollbar-hide ">
       <div className="m-auto xl:w-6/12 lg:w-8/12 sm:w-10/12 w-full py-10 h-auto">
         <Profile />
         <Body />
@@ -31,7 +31,7 @@ const Profile = () => {
           <img src="https://avatars.githubusercontent.com/u/26783512" alt="" />
         </div>
       </div>
-      <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col">
+      <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col duration-300">
         <h1 className="font-bold text-3xl ">Farkhan Azmi</h1>
         <h1 className="text-lg font-mono">Software Engineer</h1>
         <h1 className=" text-xs">
