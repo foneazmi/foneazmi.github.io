@@ -1,11 +1,16 @@
-name: gh-pages
+name: ci-cd
+
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  build-test-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,3 +28,17 @@ jobs:
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+      - name: Deploy to vps
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY_ED25519 }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd web/foneazmi.github.io
+            git pull origin master
+            git status
+            yarn
+            yarn build
