@@ -30,6 +30,13 @@ const DATA = [
     icon: "📱",
   },
   {
+    image: portfolioChatbot,
+    title: "ChatBot",
+    description: "Whatsapp & Telegram chat bot",
+    link: "https://web.telegram.org/k/#@NamelessxyzBot",
+    icon: "🤖",
+  },
+  {
     image: portfolioParking,
     title: "Parking App",
     description: "Manage your parking area",
@@ -37,11 +44,11 @@ const DATA = [
     icon: "📱",
   },
   {
-    image: portfolioChatbot,
-    title: "ChatBot",
-    description: "Whatsapp & Telegram chat bot",
-    link: "https://web.telegram.org/k/#@NamelessxyzBot",
-    icon: "🤖",
+    text: "🙈🙊🙉",
+    title: "Coming Soon",
+    description: "Add more later",
+    link: "#",
+    icon: "🦄",
   },
   //
 ];
@@ -52,7 +59,7 @@ const PortfolioItem = ({ image, title, description, link, icon, text }) => (
       <img src={image} alt="image" className=" w-full h-full" />
     ) : (
       <div className=" w-full h-full justify-center items-center flex">
-        <h1 className="text-8xl">{text}</h1>
+        <h1 className="text-8xl text-center sm:text-6xl md:text-7xl">{text}</h1>
       </div>
     )}
     <div className="sticky bottom-0 bg-primary h-20 p-4 flex items-center">
