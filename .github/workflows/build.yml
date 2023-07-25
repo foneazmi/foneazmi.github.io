@@ -22,11 +22,11 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: public
+          build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-      - name: Sleep for 30 seconds
-        run: sleep 30s
+      - name: Sleep for 60 seconds
+        run: sleep 60s
         shell: bash
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
