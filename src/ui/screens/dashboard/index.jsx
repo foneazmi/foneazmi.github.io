@@ -37,7 +37,7 @@ const Profile = () => {
         <h1 className=" text-xs">
           Talented software engineer with {getExperienceYear("2020")}+ years of
           work experience. who always try to challenge and learn some new
-          experiences, knowledge, and skills. 🤖
+          experiences, knowledge, and skills. 🤖🤖🤖
         </h1>
         <div className="flex-row flex flex-wrap">
           {CONTACT_DATA.map((element, index) => (

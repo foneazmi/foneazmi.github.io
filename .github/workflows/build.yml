@@ -17,14 +17,17 @@ jobs:
           node-version: "18.x"
       - run: yarn
       - run: yarn build
-      - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v1
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: dist
+          build_dir: public
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
