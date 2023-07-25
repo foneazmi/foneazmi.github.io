@@ -1,4 +1,4 @@
-name: build
+name: Build & Deploy
 
 on:
   push:
@@ -24,3 +24,15 @@ jobs:
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY_ED25519 }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd web/foneazmi.github.io
+            git pull origin gh-pages
+            git status
