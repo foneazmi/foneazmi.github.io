@@ -3,6 +3,7 @@ import {
   DashboardScreen,
   CakePrivacyPolicyScreen,
   PortfolioScreen,
+  CakeLandingScreen,
 } from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Layout, Loader } from "./ui/components";
@@ -10,6 +11,10 @@ import { useSelector } from "react-redux";
 import { FaRegLaughWink, FaRegObjectGroup } from "react-icons/fa";
 
 export const OTHER_ROUTE = [
+  {
+    path: "/cake",
+    element: <CakeLandingScreen />,
+  },
   {
     path: "/cake/privacy-policy",
     element: <CakePrivacyPolicyScreen />,
