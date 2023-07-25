@@ -44,7 +44,7 @@ const DATA = [
     icon: "📱",
   },
   {
-    text: "🙈🙊🙉",
+    text: "🙉🙊🙈",
     title: "Coming Soon",
     description: "Add more later",
     link: "#",
