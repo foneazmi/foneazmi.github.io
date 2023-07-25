@@ -1,19 +1,15 @@
-name: ci-cd
+name: deploy
 
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - gh-pages
 
 jobs:
-  build:
-    name: Build
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to VPS & Github Pages
+      - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -22,7 +18,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd web/foneazmi.github.io
-            git pull origin master
+            git pull origin gh-pages
             git status
-            yarn
-            yarn deploy
