@@ -47,7 +47,7 @@ const DATA = [
     text: "🙉🙊🙈",
     title: "Coming Soon",
     description: "Add more later",
-    link: "#",
+    link: "",
     icon: "🦄",
   },
   //
@@ -68,7 +68,7 @@ const PortfolioItem = ({ image, title, description, link, icon, text }) => (
         <h1 className="text-primary-content text-xs">{description}</h1>
       </div>
       <div>
-        <h1 onClick={() => window.open(link)} className="text-5xl">
+        <h1 onClick={() => link && window.open(link)} className="text-5xl">
           {icon}
         </h1>
       </div>

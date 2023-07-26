@@ -74,7 +74,7 @@ const ThemeItem = memo(({ theme }) => {
   const dispatch = useDispatch();
   return (
     <div
-      className="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2"
+      className="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2 hover:scale-105 duration-150"
       data-set-theme={theme}
       data-act-class="outline"
       onClick={() => dispatch(setTheme(theme))}
