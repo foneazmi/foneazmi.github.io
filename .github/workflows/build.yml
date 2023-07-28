@@ -27,6 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
   pull:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS
