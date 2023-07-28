@@ -8,7 +8,7 @@ import {
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import { Layout, Loader } from "./ui/components";
 import { useSelector } from "react-redux";
-import { FaRegLaughWink, FaRegObjectGroup } from "react-icons/fa";
+import { FaRegLaughWink, FaRegObjectGroup, FaRocket } from "react-icons/fa";
 
 export const OTHER_ROUTE = [
   {
@@ -36,6 +36,14 @@ export const SIDE_MENU = [
     icon: <FaRegObjectGroup size={18} />,
     element: <PortfolioScreen />,
     sidebar: true,
+  },
+];
+
+export const OTHER_SIDE_MENU = [
+  {
+    text: "Status",
+    path: "https://foneazmi.github.io/status/",
+    icon: <FaRocket size={18} />,
   },
 ];
 

@@ -25,6 +25,10 @@ jobs:
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+  pull:
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:

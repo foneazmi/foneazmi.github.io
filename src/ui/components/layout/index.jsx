@@ -3,7 +3,7 @@ import { FaSwatchbook } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
-import { SIDE_MENU } from "../../../routes";
+import { OTHER_SIDE_MENU, SIDE_MENU } from "../../../routes";
 import { memo } from "react";
 
 export const Layout = memo(({ content }) => {
@@ -47,6 +47,17 @@ const Navbar = memo(() => {
           text={element.text}
           active={element.path === location.pathname}
           sideText={element.badge}
+        />
+      ))}
+
+      {OTHER_SIDE_MENU.map((element, index) => (
+        <NavbarItem
+          key={`${index}-other-sidebar`}
+          path={element.path}
+          icon={element.icon}
+          text={element.text}
+          active={false}
+          sideText=""
         />
       ))}
     </div>
