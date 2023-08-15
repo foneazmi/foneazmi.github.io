@@ -1,8 +1,8 @@
 import { getExperienceYear } from "../../../helpers";
 import { Experience } from "./components";
-import { useSelector } from "react-redux";
 import { CONTACT_DATA } from "./contact-data";
 import { photoStyle } from "../../../helpers";
+import { useTheme } from "../../../stores";
 
 export const DashboardScreen = () => {
   return (
@@ -23,7 +23,7 @@ const Body = () => (
 );
 
 const Profile = () => {
-  const { theme } = useSelector(({ global }) => global);
+  const { theme } = useTheme();
   return (
     <div className="flex flex-col sm:flex-row mx-4">
       <div className="avatar">

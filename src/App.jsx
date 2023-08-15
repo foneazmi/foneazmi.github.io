@@ -1,16 +1,17 @@
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/lib/integration/react";
-import { store, persistor } from "./stores";
-import { RouteApp } from "./routes";
 import "./App.css";
+import { Layout } from "./ui/components";
+import { useTheme } from "./stores";
+import { BrowserRouter } from "react-router-dom";
+import { RouterApp } from "./routes";
 
 function App() {
+  const { theme } = useTheme();
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor} loading={null}>
-        <RouteApp />
-      </PersistGate>
-    </Provider>
+    <div data-theme={theme}>
+      <BrowserRouter>
+        <Layout content={<RouterApp />} />
+      </BrowserRouter>
+    </div>
   );
 }
 

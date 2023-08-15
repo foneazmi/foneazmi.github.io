@@ -4,7 +4,7 @@ export const Experience = () => (
   <div>
     <p className=" text-xl">Experience</p>
     {EXPERIENCE_DATA.map((experience, index) => (
-      <ExperiencesItem key={`${index}-experience`} {...experience} />
+      <ExperiencesItem key={`${index}-experiences`} {...experience} />
     ))}
   </div>
 );
@@ -17,8 +17,9 @@ const ExperiencesItem = ({ company, experiences }) => {
         <div className="h-5 group-hover:w-10 duration-200 w-2 bg-primary mr-2 rounded" />
         <p className="antialiased text-base font-extrabold">{company}</p>
       </div>
-      {experiences.map((experience) => (
+      {experiences.map((experience, index) => (
         <ExperienceItem
+          key={`${index}-experience`}
           experience={experience}
           isMoreThanOneExperience={isMoreThanOneExperience}
         />

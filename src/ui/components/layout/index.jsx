@@ -1,10 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { FaSwatchbook } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
 import { OTHER_SIDE_MENU, SIDE_MENU } from "../../../routes";
 import { memo } from "react";
+import { useTheme } from "../../../stores";
 
 export const Layout = memo(({ content }) => {
   return (
@@ -82,13 +81,13 @@ const NavbarItem = memo((props) => {
 });
 
 const ThemeItem = memo(({ theme }) => {
-  const dispatch = useDispatch();
+  const { setTheme } = useTheme();
   return (
     <div
       className="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2 hover:scale-105 duration-150"
       data-set-theme={theme}
       data-act-class="outline"
-      onClick={() => dispatch(setTheme(theme))}
+      onClick={() => setTheme(theme)}
     >
       <div
         data-theme={theme}

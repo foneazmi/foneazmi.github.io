@@ -54,7 +54,7 @@ const DATA = [
 ];
 
 const PortfolioItem = ({ image, title, description, link, icon, text }) => (
-  <div class="w-full sm:w-52 md:w-72 aspect-square rounded-lg bg-secondary overflow-hidden hover:scale-105 duration-300 select-none">
+  <div className="w-full sm:w-52 md:w-72 aspect-square rounded-lg bg-secondary overflow-hidden hover:scale-105 duration-300 select-none">
     {image ? (
       <img src={image} alt="image" className=" w-full h-full" />
     ) : (

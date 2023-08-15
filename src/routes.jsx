@@ -5,10 +5,9 @@ import {
   PortfolioScreen,
   CakeLandingScreen,
 } from "./ui/screens";
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
-import { Layout, Loader } from "./ui/components";
-import { useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 import { FaRegLaughWink, FaRegObjectGroup, FaRocket } from "react-icons/fa";
+import { isDev } from "./helpers";
 
 export const OTHER_ROUTE = [
   {
@@ -40,14 +39,14 @@ export const SIDE_MENU = [
 ];
 
 export const OTHER_SIDE_MENU = [
-  {
+  !isDev && {
     text: "Status",
     path: "https://foneazmi.github.io/status/",
     icon: <FaRocket size={18} />,
   },
 ];
 
-const RouterApp = () => {
+export const RouterApp = () => {
   return (
     <Routes>
       {OTHER_ROUTE.concat(SIDE_MENU).map((route) => (
@@ -58,17 +57,5 @@ const RouterApp = () => {
         />
       ))}
     </Routes>
-  );
-};
-
-export const RouteApp = () => {
-  const { theme } = useSelector(({ global }) => global);
-  return (
-    <div data-theme={theme}>
-      <Router>
-        <Loader />
-        <Layout content={<RouterApp />} />
-      </Router>
-    </div>
   );
 };
