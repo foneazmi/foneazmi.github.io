@@ -1,11 +1,18 @@
 import "./App.css";
 import { Layout } from "./ui/components";
-import { useTheme } from "./stores";
+import { useBio, useTheme } from "./stores";
 import { BrowserRouter } from "react-router-dom";
 import { RouterApp } from "./routes";
+import { useEffect } from "react";
 
 function App() {
   const { theme } = useTheme();
+  const { fetch } = useBio();
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <div data-theme={theme}>
       <BrowserRouter>

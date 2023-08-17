@@ -1,8 +1,5 @@
 import moment from "moment";
 
-export const getExperienceYear = (start) =>
-  moment.duration(moment().diff(moment(start))).years();
-
 export const getExperienceMonth = (start, end) => {
   const endDate = end ? moment(end, "MM/Y") : moment();
   const startDate = moment(start, "MM/Y");

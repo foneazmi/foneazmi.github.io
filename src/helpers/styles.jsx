@@ -1,3 +1,5 @@
+import { FaGithub, FaLinkedin, FaTelegram, FaWhatsapp } from "react-icons/fa";
+
 export const THEME = [
   "light",
   "dark",
@@ -60,4 +62,11 @@ export const photoStyle = {
   night: "mask mask-squircle",
   coffee: "mask mask-squircle",
   winter: "mask mask-squircle",
+};
+
+export const Icons = {
+  wa: <FaWhatsapp />,
+  li: <FaLinkedin />,
+  gh: <FaGithub />,
+  tg: <FaTelegram />,
 };
