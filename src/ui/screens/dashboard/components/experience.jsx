@@ -1,13 +1,19 @@
 import { getExperienceMonth } from "../../../../helpers/date";
+import { useBio } from "../../../../stores";
 
-export const Experience = () => (
-  <div>
-    <p className=" text-xl">Experience</p>
-    {EXPERIENCE_DATA.map((experience, index) => (
-      <ExperiencesItem key={`${index}-experiences`} {...experience} />
-    ))}
-  </div>
-);
+export const Experience = () => {
+  const { bio } = useBio();
+  return (
+    bio.experiences && (
+      <div>
+        <p className=" text-xl">Experience</p>
+        {bio.experiences.map((experience, index) => (
+          <ExperiencesItem key={`${index}-experiences`} {...experience} />
+        ))}
+      </div>
+    )
+  );
+};
 
 const ExperiencesItem = ({ company, experiences }) => {
   const isMoreThanOneExperience = experiences.length > 1;
@@ -47,54 +53,3 @@ const ExperienceItem = ({ experience, isMoreThanOneExperience }) => (
     </div>
   </div>
 );
-
-const EXPERIENCE_DATA = [
-  {
-    company: "Appfuxion Indonesia",
-    experiences: [
-      {
-        role: "Software Engineer",
-        // desc: "lorem ipsum",
-        startDate: "12/2021",
-        endDate: "",
-        location: "Jakarta, Indonesia (Remote)",
-      },
-    ],
-  },
-  {
-    company: "GENESYS Application Indonesia",
-    experiences: [
-      {
-        role: "Frontend Mobile Developer",
-        // desc: "lorem ipsum",
-        startDate: "03/2021",
-        endDate: "12/2021",
-        location: "Jakarta, Indonesia (Remote)",
-      },
-    ],
-  },
-  {
-    company: "KAZOKKU",
-    experiences: [
-      {
-        role: "React Native Developer",
-        // desc: "lorem ipsum",
-        startDate: "09/2021",
-        endDate: "11/2021",
-        location: "Jakarta, Indonesia (Remote)",
-      },
-    ],
-  },
-  {
-    company: "Birumerah Technology",
-    experiences: [
-      {
-        role: "Mobile Application Developer",
-        // desc: "lorem ipsum",
-        startDate: "04/2020",
-        endDate: "03/2021",
-        location: "Jakarta, Indonesia (Remote)",
-      },
-    ],
-  },
-];
