@@ -6,7 +6,7 @@ export const DashboardScreen = () => {
   const { theme } = useTheme();
   const { bio } = useBio();
 
-  if (!bio) {
+  if (!bio?.contacts) {
     return (
       <div className="overflow-y-auto h-full w-full justify-center items-center flex scrollbar-hide ">
         <span class="loading loading-bars loading-lg" />
