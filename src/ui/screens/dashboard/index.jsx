@@ -3,10 +3,21 @@ import { Icons, photoStyle } from "../../../helpers";
 import { useTheme, useBio } from "../../../stores";
 
 export const DashboardScreen = () => {
+  const { theme } = useTheme();
+  const { bio } = useBio();
+
+  if (!bio) {
+    return (
+      <div className="overflow-y-auto h-full w-full justify-center items-center flex scrollbar-hide ">
+        <span class="loading loading-bars loading-lg" />
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-y-auto h-full justify-center items-center flex scrollbar-hide ">
       <div className="m-auto xl:w-6/12 lg:w-8/12 sm:w-10/12 w-full py-10 h-auto">
-        <Profile />
+        <Profile bio={bio} theme={theme} />
         <Body />
       </div>
     </div>
@@ -20,10 +31,7 @@ const Body = () => (
   </div>
 );
 
-const Profile = () => {
-  const { theme } = useTheme();
-  const { bio } = useBio();
-
+const Profile = ({ bio, theme }) => {
   return (
     <div className="flex flex-col sm:flex-row mx-4">
       <div className="avatar">
