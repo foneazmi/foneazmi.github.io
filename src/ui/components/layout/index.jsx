@@ -37,7 +37,7 @@ const FAB = memo(() => {
 const Navbar = memo(() => {
   const location = useLocation();
   return (
-    <div className="sm:h-screen sm:w-24 h-20 w-screen bg-base-300 flex justify-center sm:flex-col flex-row items-center sm:relative duration-300">
+    <div className="sm:h-screen sm:w-24 h-20 w-screen flex justify-center sm:flex-col flex-row items-center sm:relative duration-300">
       {SIDE_MENU.map((element, index) => (
         <NavbarItem
           key={`${index}-sidebar`}
