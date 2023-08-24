@@ -24,9 +24,11 @@ const Profile = () => {
   const { theme } = useTheme();
   const { bio } = useBio();
   return (
-    <div className="flex flex-col sm:flex-row mx-4">
+    <div className="flex flex-col sm:flex-row mx-4 duration-200">
       <div className="avatar">
-        <div className={`h-28 w-28 sm:w-32 sm:h-32 ${photoStyle[theme]}`}>
+        <div
+          className={`h-28 w-28 sm:w-32 sm:h-32 ${photoStyle[theme]} duration-200`}
+        >
           <img src={bio.photo} alt="" />
         </div>
       </div>
