@@ -1,7 +1,7 @@
-const BASE_URL = "https://api.khan.my.id/khan";
+const BASE = "https://api.khan.my.id";
 
 const getBio = async () => {
-  return fetch(`${BASE_URL}/me`, {
+  return fetch(`${BASE}/me`, {
     method: "GET",
   }).then(async (response) => await response.json());
 };
