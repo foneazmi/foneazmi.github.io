@@ -5,7 +5,7 @@ import { api } from "../services/api";
 export const useBio = create(
   persist(
     (set) => ({
-      bio: {},
+      bio: false,
       fetch: async () => {
         const bio = await api.getBio();
         set({ bio });
