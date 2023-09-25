@@ -1,7 +1,6 @@
 import { Experience } from "./components";
 import { Icons, photoStyle } from "../../../helpers";
 import { useTheme, useBio } from "../../../stores";
-import { BlurImage } from "../../components";
 
 export const DashboardScreen = () => {
   return (
@@ -28,9 +27,9 @@ const Profile = () => {
     <div className="flex flex-col sm:flex-row mx-4 duration-200">
       <div className="avatar">
         <div
-          className={`h-28 w-28 sm:w-36 sm:h-36 ${photoStyle[theme]} duration-200`}
+          className={`h-28 w-28 sm:w-32 sm:h-32 ${photoStyle[theme]} duration-200`}
         >
-          <BlurImage preview={`${bio.photo}&s=10`} image={`${bio.photo}&s=200`} alt="" />
+          <img src={bio.photo} alt="" />
         </div>
       </div>
       <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col duration-300">
