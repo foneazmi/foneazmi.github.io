@@ -27,9 +27,9 @@ const Profile = () => {
     <div className="flex flex-col sm:flex-row mx-4 duration-200">
       <div className="avatar">
         <div
-          className={`h-28 w-28 sm:w-32 sm:h-32 ${photoStyle[theme]} duration-200`}
+          className={`h-32 w-32 sm:w-36 sm:h-36 ${photoStyle[theme]} duration-200`}
         >
-          <img src={bio.photo} alt="" />
+          <img src={`${bio.photo}&s=200`} alt="" />
         </div>
       </div>
       <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col duration-300">
