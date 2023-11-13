@@ -13,24 +13,24 @@
     "predeploy": "yarn build"
   },
   "dependencies": {
-    "daisyui": "^3.7.6",
+    "daisyui": "^4.0.3",
     "dayjs": "^1.11.10",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "react-router-dom": "^6.16.0",
-    "zustand": "^4.4.1"
+    "react-router-dom": "^6.18.0",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@types/react": "^18.2.22",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "autoprefixer": "^10.4.15",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react-swc": "^3.4.1",
+    "autoprefixer": "^10.4.16",
     "gh-pages": "^6.0.0",
-    "postcss": "^8.4.30",
-    "tailwindcss": "^3.3.3",
-    "vite": "^4.4.9",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^4.5.0",
     "vite-plugin-minify": "^1.5.2"
   }
 }

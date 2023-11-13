@@ -1,6 +1,6 @@
 import { Experience } from "./components";
-import { Icons, photoStyle } from "../../../helpers";
-import { useTheme, useBio } from "../../../stores";
+import { Icons } from "../../../helpers";
+import { useBio } from "../../../stores";
 
 export const DashboardScreen = () => {
   return (
@@ -21,15 +21,18 @@ const Body = () => (
 );
 
 const Profile = () => {
-  const { theme } = useTheme();
   const { bio } = useBio();
   return (
     <div className="flex flex-col sm:flex-row mx-4 duration-200">
       <div className="avatar">
         <div
-          className={`h-32 w-32 sm:w-36 sm:h-36 ${photoStyle[theme]} duration-200`}
+          className={`h-32 w-32 sm:w-36 sm:h-36 overflow-hidden rounded-lg `}
         >
-          <img src={`${bio.photo}&s=200`} alt="" />
+          <img
+            className="hover:scale-125 duration-150"
+            src={`${bio.photo}&s=150`}
+            alt=""
+          />
         </div>
       </div>
       <div className="sm:ml-4 sm:mt-0 ml-0 mt-4 flex flex-col duration-300">
