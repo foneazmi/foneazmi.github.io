@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { FaSwatchbook } from "react-icons/fa";
+import { FaRocket, FaSwatchbook } from "react-icons/fa";
 import { THEME } from "../../../helpers";
-import { OTHER_SIDE_MENU, SIDE_MENU } from "../../../routes";
+import { SIDE_MENU } from "../../../routes";
 import { memo } from "react";
 import { useTheme } from "../../../stores";
 
@@ -12,22 +12,30 @@ export const Layout = memo(({ content }) => {
       <div className="flex-1 w-full bg-base-100 sm:rounded-3xl overflow-hidden sm:my-2 sm:mr-2">
         {content}
       </div>
-      <FAB />
+      <Header />
     </div>
   );
 });
 
-const FAB = memo(() => {
+const Header = memo(() => {
   return (
-    <div className="dropdown dropdown-hover dropdown-end absolute top-4 right-4">
-      <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
-        <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current sm:h-5 sm:w-5" />
-      </label>
-      <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box h-52 w-52 overflow-y-auto shadow-2xl scrollbar-hide">
-        <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
-          {THEME.map((element, index) => (
-            <ThemeItem theme={element} key={`${index}-theme`} />
-          ))}
+    <div className="absolute top-4 right-4 flex flex-row">
+      <a
+        className="btn btn-ghost btn-circle bg-base-300"
+        href="https://foneazmi.github.io/status/"
+      >
+        <FaRocket className="inline-block h-4 w-4 text-base-content stroke-current sm:h-5 sm:w-5" />
+      </a>
+      <div className="ml-2 dropdown dropdown-hover dropdown-end ">
+        <label tabIndex="0" className="btn btn-ghost btn-circle bg-base-300">
+          <FaSwatchbook className="inline-block h-4 w-4 text-base-content stroke-current sm:h-5 sm:w-5" />
+        </label>
+        <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box h-44 w-52 overflow-y-auto shadow-2xl scrollbar-hide">
+          <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
+            {THEME.map((element, index) => (
+              <ThemeItem theme={element} key={`${index}-theme`} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -48,17 +56,6 @@ const Navbar = memo(() => {
           sideText={element.badge}
         />
       ))}
-
-      {OTHER_SIDE_MENU.map((element, index) => (
-        <NavbarItem
-          key={`${index}-other-sidebar`}
-          path={element.path}
-          icon={element.icon}
-          text={element.text}
-          active={false}
-          sideText=""
-        />
-      ))}
     </div>
   );
 });
@@ -66,7 +63,7 @@ const Navbar = memo(() => {
 const NavbarItem = memo((props) => {
   const iconStyle = props.active
     ? "bg-primary px-4 py-2 rounded-full text-primary-content"
-    : "py-2 rounded-full text-base-content bg-blend-darken duration-500 transition-all group-hover:bg-primary group-hover:text-primary-content group-hover:px-4";
+    : "py-2 rounded-full text-base-content bg-blend-darken duration-150 transition-all group-hover:bg-primary group-hover:text-primary-content group-hover:px-4";
   return (
     <Link
       className="w-24 flex items-center justify-center flex-col my-4 select-none group"

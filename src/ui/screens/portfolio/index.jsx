@@ -63,7 +63,7 @@ const PortfolioItem = ({ image, title, description, link, icon, text }) => (
       </div>
     )}
     <div className="sticky bottom-0">
-      <div class="h-20 w-full bg-gradient-to-t invisible group-hover:visible from-primary from-50% to-transparent flex-row flex justify-center items-center p-4">
+      <div className="h-20 w-full bg-gradient-to-t invisible group-hover:visible from-primary from-50% to-transparent flex-row flex justify-center items-center p-4">
         <div className="flex flex-col flex-1">
           <h1 className="text-primary-content text-lg font-bold">{title}</h1>
           <h1 className="text-primary-content text-xs">{description}</h1>

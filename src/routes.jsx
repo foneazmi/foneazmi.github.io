@@ -37,13 +37,13 @@ export const SIDE_MENU = [
   },
 ];
 
-export const OTHER_SIDE_MENU = [
-  {
-    text: "Status",
-    path: "https://foneazmi.github.io/status/",
-    icon: <FaRocket size={18} />,
-  },
-];
+// export const OTHER_SIDE_MENU = [
+//   {
+//     text: "Status",
+//     path: "https://foneazmi.github.io/status/",
+//     icon: <FaRocket size={18} />,
+//   },
+// ];
 
 export const RouterApp = () => {
   return (
