@@ -1,5 +1,5 @@
 {
-	"name": "khan",
+	"name": "foneazmi.github.io",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -8,12 +8,13 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"deploy": "bun run build && wrangler pages deploy dist",
+		"deploy": "bun run build && wrangler pages deploy dist && gh-pages -d dist",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.17",
 		"date-fns": "^4.1.0",
+		"gh-pages": "^6.3.0",
 		"lucide-react": "^0.554.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
