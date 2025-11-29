@@ -42,14 +42,12 @@ export const DATA: PortfolioData = {
             "image": "https://pb.khan.my.id/api/files/fd3d0lnb1u57m6u/v0613zq11h4sxgi/scifest_JDC8djuw4n.webp",
             "title": "Scifest",
             "description": "Online ticketing",
-            "link": "#",
             "icon": "💻"
         },
         {
             "image": "https://pb.khan.my.id/api/files/fd3d0lnb1u57m6u/v0613zq11h4sxgi/by_coffee_vhPTzofjma.webp",
             "title": "ByCoffee",
             "description": "Coffee shop app",
-            "link": "#",
             "icon": "📱"
         },
         {
@@ -63,7 +61,6 @@ export const DATA: PortfolioData = {
             "image": "https://pb.khan.my.id/api/files/fd3d0lnb1u57m6u/v0613zq11h4sxgi/parking_FakZSCAbe2.webp",
             "title": "Parking App",
             "description": "Manage your parking area",
-            "link": "#",
             "icon": "📱"
         },
         {
@@ -77,7 +74,6 @@ export const DATA: PortfolioData = {
             "text": "🙉🙊🙈",
             "title": "Coming Soon",
             "description": "Add more later",
-            "link": "",
             "icon": "🦄"
         }
     ],

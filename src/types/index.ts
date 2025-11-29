@@ -9,7 +9,7 @@ export interface PortfolioItem {
     text?: string;
     title: string;
     description: string;
-    link: string;
+    link?: string;
     icon: string;
 }
 

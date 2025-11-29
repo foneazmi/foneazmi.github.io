@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Briefcase } from 'lucide-react';
+import { Home, Briefcase, LayoutGrid } from 'lucide-react';
 
 export const FloatingDock = () => {
     const navItems = [
         { path: '/', label: 'Home', icon: <Home className="w-5 h-5" /> },
-        { path: '/portfolio', label: 'Portfolio', icon: <Briefcase className="w-5 h-5" /> },
+        { path: '/experience', label: 'Experience', icon: <Briefcase className="w-5 h-5" /> },
+        { path: '/portfolio', label: 'Portfolio', icon: <LayoutGrid className="w-5 h-5" /> },
         // Add more items if needed, e.g., Contact or Blog
     ];
 

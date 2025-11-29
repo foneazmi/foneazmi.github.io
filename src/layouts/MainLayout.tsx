@@ -25,7 +25,7 @@ const MainLayout = () => {
 
             {/* Main Content */}
             <main className="min-h-screen flex flex-col pb-24 relative z-0">
-                <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-12">
+                <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-12 flex flex-col justify-center">
                     <Outlet />
                 </div>
             </main>
