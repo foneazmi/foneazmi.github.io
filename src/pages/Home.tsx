@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { DATA } from '../data';
+import { useMe } from '../context/MeContext';
 import {
     IconGitHub, IconLinkedIn, IconTelegram, IconWhatsapp, IconEmail
 } from '../components/common/Icons';
 
 import { MapPin } from 'lucide-react';
+import { Marquee } from '@/components/common/Marquee';
 
 // Helper for conditional icon rendering
 const SocialIcon = ({ type, className }: { type: string, className?: string }) => {
@@ -19,6 +20,7 @@ const SocialIcon = ({ type, className }: { type: string, className?: string }) =
 };
 
 const Home = () => {
+    const data = useMe();
     const [isWaving, setIsWaving] = useState(false);
 
     const triggerWave = () => {
@@ -26,62 +28,28 @@ const Home = () => {
         setTimeout(() => setIsWaving(false), 2000);
     };
 
+    if (data.loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <span className="text-3xl">🙈 🙉 🙊</span>
+            </div>
+        );
+    }
+
+    if (data.error) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <span className="text-3xl">☠️</span>
+            </div>
+        );
+    }
+
     return (
         <div className="space-y-16 pb-20">
             {/* Hero Section with Marquee Background */}
             <section className="relative min-h-[70vh] flex items-center">
                 {/* X-Crossing Marquee Background - Edge to Edge */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-full overflow-hidden pointer-events-none opacity-30 z-0">
-
-                    {/* Gradient Masks for Edges and Center */}
-                    <div className="absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_20%,#030014_100%)]"></div>
-                    <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-[#030014] to-transparent z-20"></div>
-                    <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-[#030014] to-transparent z-20"></div>
-
-                    {/* First Diagonal - Top-Left to Bottom-Right */}
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center mix-blend-screen" style={{ transform: 'rotate(-15deg) scale(1.2)' }}>
-                        <div className="flex gap-8 whitespace-nowrap animate-marquee-diagonal-1">
-                            {[...DATA.skills, ...DATA.skills, ...DATA.skills].map((skill, index) => (
-                                <span
-                                    key={`diag1-${index}`}
-                                    className="px-6 py-3 rounded-2xl bg-white/5 text-purple-200/80 text-lg font-medium border border-purple-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.1)]"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                            {[...DATA.skills, ...DATA.skills, ...DATA.skills].map((skill, index) => (
-                                <span
-                                    key={`diag1-dup-${index}`}
-                                    className="px-6 py-3 rounded-2xl bg-white/5 text-purple-200/80 text-lg font-medium border border-purple-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.1)]"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Second Diagonal - Top-Right to Bottom-Left */}
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center mix-blend-screen" style={{ transform: 'rotate(15deg) scale(1.2)' }}>
-                        <div className="flex gap-8 whitespace-nowrap animate-marquee-diagonal-2">
-                            {[...DATA.skills, ...DATA.skills, ...DATA.skills].map((skill, index) => (
-                                <span
-                                    key={`diag2-${index}`}
-                                    className="px-6 py-3 rounded-2xl bg-white/5 text-blue-200/80 text-lg font-medium border border-blue-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.1)]"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                            {[...DATA.skills, ...DATA.skills, ...DATA.skills].map((skill, index) => (
-                                <span
-                                    key={`diag2-dup-${index}`}
-                                    className="px-6 py-3 rounded-2xl bg-white/5 text-blue-200/80 text-lg font-medium border border-blue-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.1)]"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                <Marquee skills={data.skills} />
 
                 {/* Hero Content */}
                 <div className="relative z-10 max-w-3xl mx-auto w-full animate-fade-in space-y-12">
@@ -92,8 +60,9 @@ const Home = () => {
                             onClick={triggerWave}
                         >
                             <img
-                                src={DATA.photo}
-                                alt={DATA.name}
+                                src={data.photo}
+                                srcSet={`${data.photo}&s=160 1x, ${data.photo}&s=320 2x, ${data.photo}&s=480 3x`}
+                                alt={data.name}
                                 className="relative w-40 h-40 rounded-4xl object-cover shadow-2xl ring-4 ring-white dark:ring-neutral-900 z-10"
                             />
                             <div className={`absolute bottom-2 right-2 z-20 p-2 rounded-2xl bg-white/15 text-white shadow-lg shadow-purple-500/20 glass backdrop-blur-xl`}>
@@ -106,10 +75,10 @@ const Home = () => {
                             {/* Name & Title */}
                             <div>
                                 <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                                    {DATA.name}
+                                    {data.name}
                                 </h1>
                                 <p className="text-lg text-purple-200/80 mb-4">
-                                    {DATA.job}
+                                    {data.job}
                                 </p>
                                 <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg glass text-neutral-400 text-xs border border-white/5">
@@ -125,7 +94,7 @@ const Home = () => {
 
                             {/* Description */}
                             <p className="text-neutral-400 leading-relaxed">
-                                {DATA.description}
+                                {data.description}
                             </p>
                         </div>
                     </div>
@@ -134,7 +103,7 @@ const Home = () => {
                     <div className="space-y-4">
                         <h2 className="text-sm font-semibold text-neutral-400 uppercase tracking-wider text-center md:text-left">Contact</h2>
                         <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                            {DATA.contacts.filter(c => c.enable).map((contact, idx) => (
+                            {data.contacts.filter(c => c.enable).map((contact, idx) => (
                                 <a
                                     key={idx}
                                     href={contact.link}

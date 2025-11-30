@@ -11,14 +11,16 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "script-defer",
       includeAssets: [
         "favicon.ico",
         "icons/icon-192x192.png",
         "icons/icon-512x512.png",
       ],
       manifest: {
-        name: "Stock App",
-        short_name: "Stock",
+        name: "Farkhan Azmi",
+        short_name: "Farkhan Azmi",
+        description: "Farkhan Azmi Portfolio",
         start_url: "/",
         display: "standalone",
         background_color: "#000000",

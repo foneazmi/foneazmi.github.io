@@ -1,7 +1,8 @@
-import { DATA } from '../data';
+import { useMe } from '../context/MeContext';
 import { PortfolioCard } from '../components/features/PortfolioCard';
 
 const Portfolio = () => {
+    const data = useMe();
     return (
         <div className="max-w-5xl mx-auto space-y-12 pb-20 animate-fade-in">
             {/* Header */}
@@ -17,7 +18,7 @@ const Portfolio = () => {
             {/* Projects Grid */}
             <section>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {DATA.portfolio.map((item, index) => (
+                    {data.portfolio.map((item, index) => (
                         <PortfolioCard key={index} item={item} index={index} />
                     ))}
                 </div>

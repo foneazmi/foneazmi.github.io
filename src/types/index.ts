@@ -25,7 +25,7 @@ export interface Experience {
     roles: Role[];
 }
 
-export interface PortfolioData {
+export interface MeData {
     photo: string;
     name: string;
     job: string;

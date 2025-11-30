@@ -1,7 +1,8 @@
-import { DATA } from '../data';
+import { useMe } from '../context/MeContext';
 import { ExperienceItem } from '@/components/features/ExperienceItem';
 
 const Experience = () => {
+    const data = useMe();
     return (
         <div className="max-w-3xl mx-auto space-y-8 pb-20 animate-fade-in">
             {/* Header */}
@@ -16,12 +17,12 @@ const Experience = () => {
 
             {/* Experience List */}
             <div className="space-y-8 pt-8">
-                {DATA.experiences.map((exp, idx) => (
+                {data.experiences.map((exp, idx) => (
                     <ExperienceItem
                         key={idx}
                         data={exp}
                         index={idx}
-                        isLast={idx === DATA.experiences.length - 1}
+                        isLast={idx === data.experiences.length - 1}
                     />
                 ))}
             </div>
