@@ -1,9 +1,7 @@
-
-
 @import "tailwindcss";
 
 :root {
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -19,9 +17,16 @@
 }
 
 body {
-  background:
-    radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.15), transparent 25%),
+  background: radial-gradient(
+      circle at 15% 50%,
+      rgba(76, 29, 149, 0.15),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(56, 189, 248, 0.15),
+      transparent 25%
+    ),
     #030014;
   min-height: 100vh;
   overflow-x: hidden;
@@ -34,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   letter-spacing: -0.02em;
 }
 
@@ -216,7 +221,6 @@ h6 {
 .animate-marquee-diagonal-2 {
   animation: marquee-diagonal-2 60s linear infinite;
 }
-
 
 /* Utility Classes */
 .text-gradient {
