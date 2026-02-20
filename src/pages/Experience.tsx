@@ -1,8 +1,34 @@
-import { useMe } from "../context/MeContext";
-import { ExperienceItem } from "@/components/features/ExperienceItem";
+import { memo } from 'react';
+import { useMe } from '@/context/MeContext';
+import { ExperienceItem } from '@/components/features/ExperienceItem';
 
-const Experience = () => {
+const Experience = memo(() => {
   const data = useMe();
+
+  if (data.loading) {
+    return (
+      <div
+        className="flex items-center justify-center min-h-screen"
+        role="status"
+        aria-label="Loading experience"
+      >
+        <span className="text-3xl">🙈 🙉 🙊</span>
+      </div>
+    );
+  }
+
+  if (data.error) {
+    return (
+      <div
+        className="flex items-center justify-center min-h-screen"
+        role="alert"
+        aria-label="Error loading experience"
+      >
+        <span className="text-3xl">☠️</span>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 pb-20 animate-fade-in">
       {/* Header */}
@@ -19,7 +45,7 @@ const Experience = () => {
       <div className="space-y-8 pt-8">
         {data.experiences.map((exp, idx) => (
           <ExperienceItem
-            key={idx}
+            key={`${exp.company}-${idx}`}
             data={exp}
             index={idx}
             isLast={idx === data.experiences.length - 1}
@@ -28,6 +54,8 @@ const Experience = () => {
       </div>
     </div>
   );
-};
+});
+
+Experience.displayName = 'Experience';
 
 export default Experience;

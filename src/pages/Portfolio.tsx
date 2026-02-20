@@ -1,8 +1,34 @@
-import { useMe } from "../context/MeContext";
-import { PortfolioCard } from "../components/features/PortfolioCard";
+import { memo } from 'react';
+import { useMe } from '@/context/MeContext';
+import { PortfolioCard } from '@/components/features/PortfolioCard';
 
-const Portfolio = () => {
+const Portfolio = memo(() => {
   const data = useMe();
+
+  if (data.loading) {
+    return (
+      <div
+        className="flex items-center justify-center min-h-screen"
+        role="status"
+        aria-label="Loading portfolio"
+      >
+        <span className="text-3xl">🙈 🙉 🙊</span>
+      </div>
+    );
+  }
+
+  if (data.error) {
+    return (
+      <div
+        className="flex items-center justify-center min-h-screen"
+        role="alert"
+        aria-label="Error loading portfolio"
+      >
+        <span className="text-3xl">☠️</span>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-5xl mx-auto space-y-12 pb-20 animate-fade-in">
       {/* Header */}
@@ -14,15 +40,17 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Grid */}
-      <section>
+      <section aria-label="Portfolio projects">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.portfolio.map((item, index) => (
-            <PortfolioCard key={index} item={item} index={index} />
+            <PortfolioCard key={`${item.title}-${index}`} item={item} index={index} />
           ))}
         </div>
       </section>
     </div>
   );
-};
+});
+
+Portfolio.displayName = 'Portfolio';
 
 export default Portfolio;
