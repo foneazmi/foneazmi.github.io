@@ -21,6 +21,7 @@ const renderExperience = () => {
 describe('Experience Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it('should show loading state initially', () => {

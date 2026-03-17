@@ -22,6 +22,7 @@ const renderHome = () => {
 describe('Home Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it('should show loading state initially', () => {

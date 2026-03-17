@@ -15,10 +15,12 @@ const wrapper = ({ children }: { children: ReactNode }) => (
 describe('MeContext', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    localStorage.clear();
   });
 
   it('should provide initial loading state', () => {

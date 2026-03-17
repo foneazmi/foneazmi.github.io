@@ -21,6 +21,7 @@ const renderPortfolio = () => {
 describe('Portfolio Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it('should show loading state initially', () => {
