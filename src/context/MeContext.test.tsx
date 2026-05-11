@@ -43,9 +43,12 @@ describe('MeContext', () => {
 
     const { result } = renderHook(() => useMe(), { wrapper });
 
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
+    await waitFor(
+      () => {
+        expect(result.current.loading).toBe(false);
+      },
+      { timeout: 10000 }
+    );
 
     expect(result.current.name).toBe(mockMeData.name);
     expect(result.current.job).toBe(mockMeData.job);
@@ -53,32 +56,21 @@ describe('MeContext', () => {
     expect(result.current.error).toBeUndefined();
   });
 
-  it('should handle fetch error gracefully', async () => {
-    mockFetch.mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-    });
-
-    const { result } = renderHook(() => useMe(), { wrapper });
-
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
-
-    expect(result.current.error).toBe('Failed to fetch: 500');
-    expect(result.current.name).toBe('');
-  });
-
-  it('should handle network error gracefully', async () => {
+  it('should use static fallback when API fails', async () => {
     mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
     const { result } = renderHook(() => useMe(), { wrapper });
 
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
+    await waitFor(
+      () => {
+        expect(result.current.loading).toBe(false);
+      },
+      { timeout: 10000 }
+    );
 
-    expect(result.current.error).toBe('Network error');
+    // Should use static fallback
+    expect(result.current.name).toBe('Farkhan Azmi');
+    expect(result.current.error).toBe('Using offline mode');
   });
 
   it('should provide refetch function', async () => {
@@ -89,9 +81,12 @@ describe('MeContext', () => {
 
     const { result } = renderHook(() => useMe(), { wrapper });
 
-    await waitFor(() => {
-      expect(result.current.loading).toBe(false);
-    });
+    await waitFor(
+      () => {
+        expect(result.current.loading).toBe(false);
+      },
+      { timeout: 10000 }
+    );
 
     // Verify refetch function exists
     expect(typeof result.current.refetch).toBe('function');
@@ -104,5 +99,48 @@ describe('MeContext', () => {
     expect(() => {
       renderHook(() => useMe());
     }).toThrow('useMe must be used within a PortfolioProvider');
+  });
+
+  it('should use expired cache when API fails', async () => {
+    // Set up expired cache
+    const expiredData = { ...mockMeData, name: 'Cached User' };
+    const expiredCache = JSON.stringify({
+      data: expiredData,
+      timestamp: Date.now() - 8 * 24 * 60 * 60 * 1000, // 8 days ago (expired)
+    });
+    localStorage.setItem('portfolio_me_data', expiredCache);
+
+    // Mock fetch to fail
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    const { result } = renderHook(() => useMe(), { wrapper });
+
+    await waitFor(
+      () => {
+        expect(result.current.loading).toBe(false);
+      },
+      { timeout: 10000 }
+    );
+
+    expect(result.current.name).toBe('Cached User');
+    expect(result.current.error).toBe('Using cached data (offline)');
+  });
+
+  it('should use static fallback when no cache exists', async () => {
+    // No cache set
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    const { result } = renderHook(() => useMe(), { wrapper });
+
+    await waitFor(
+      () => {
+        expect(result.current.loading).toBe(false);
+      },
+      { timeout: 10000 }
+    );
+
+    expect(result.current.name).toBe('Farkhan Azmi');
+    expect(result.current.job).toBe('Software Engineer');
+    expect(result.current.error).toBe('Using offline mode');
   });
 });

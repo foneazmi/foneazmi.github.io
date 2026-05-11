@@ -1,17 +1,17 @@
-import { memo } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Home, Briefcase, LayoutGrid } from 'lucide-react';
+import { memo } from "react";
+import { NavLink } from "react-router-dom";
+import { Home, Briefcase, LayoutGrid } from "lucide-react";
 
 const NAV_ITEMS = [
-  { path: '/', label: 'Home', icon: Home },
+  { path: "/", label: "Home", icon: Home },
   {
-    path: '/experience',
-    label: 'Experience',
+    path: "/experience",
+    label: "Experience",
     icon: Briefcase,
   },
   {
-    path: '/portfolio',
-    label: 'Portfolio',
+    path: "/portfolio",
+    label: "Portfolio",
     icon: LayoutGrid,
   },
 ] as const;
@@ -26,28 +26,27 @@ export const FloatingDock = memo(() => {
         <NavLink
           key={item.path}
           to={item.path}
+          aria-describedby={`tooltip-${item.path}`}
           className={({ isActive }) =>
             `
                             relative flex items-center justify-center p-3 rounded-xl transition-all duration-300
                             hover:bg-white/10 group
                             ${
                               isActive
-                                ? 'bg-white/15 text-white shadow-lg shadow-purple-500/20'
-                                : 'text-neutral-400 hover:text-white'
+                                ? "bg-white/15 text-white shadow-lg shadow-purple-500/20"
+                                : "text-neutral-400 hover:text-white"
                             }
                         `
           }
         >
           {({ isActive }) => (
             <>
-              <item.icon
-                className="relative z-10 w-5 h-5"
-                aria-hidden="true"
-              />
+              <item.icon className="relative z-10 w-5 h-5" aria-hidden="true" />
               <span className="sr-only">{item.label}</span>
 
               {/* Tooltip */}
               <span
+                id={`tooltip-${item.path}`}
                 className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-neutral-900 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap border border-white/10 pointer-events-none"
                 role="tooltip"
               >
@@ -69,4 +68,4 @@ export const FloatingDock = memo(() => {
   );
 });
 
-FloatingDock.displayName = 'FloatingDock';
+FloatingDock.displayName = "FloatingDock";

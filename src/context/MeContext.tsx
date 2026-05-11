@@ -7,20 +7,18 @@ import {
   type ReactNode,
 } from "react";
 import type { MeData } from "@/types";
+import {
+  EMPTY_ME,
+  STATIC_FALLBACK,
+  CACHE_KEY,
+  CACHE_TTL,
+  RETRY_CONFIG,
+} from "@/lib/portfolio-constants";
+import { logger } from "@/lib/logger";
 
-const EMPTY_ME: MeData = {
-  photo: "",
-  name: "",
-  job: "",
-  year: 0,
-  description: "",
-  contacts: [],
-  portfolio: [],
-  experiences: [],
-  skills: [],
-};
+/* eslint-disable react-refresh/only-export-components */
 
-export interface MeContextValue {
+interface MeContextValue {
   loading: boolean;
   error?: string;
   refetch: () => Promise<void>;
@@ -34,12 +32,39 @@ interface FetchState {
 
 interface MeContextReturnType extends MeContextValue, MeData {}
 
-const CACHE_KEY = "portfolio_me_data";
-const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
-
 interface CachedData {
   data: MeData;
   timestamp: number;
+}
+
+/**
+ * Fetch with retry logic and exponential backoff
+ * @param url - The URL to fetch
+ * @param options - Fetch options
+ * @param retries - Number of retries remaining
+ * @param delay - Current delay before next retry
+ * @returns Promise with fetch response
+ */
+async function fetchWithRetry(
+  url: string,
+  options?: RequestInit,
+  retries: number = RETRY_CONFIG.maxRetries,
+  delay: number = RETRY_CONFIG.baseDelay
+): Promise<Response> {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response;
+  } catch (error) {
+    if (retries > 0) {
+      // Wait before retrying (exponential backoff)
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return fetchWithRetry(url, options, retries - 1, Math.min(delay * 2, RETRY_CONFIG.maxDelay));
+    }
+    throw error;
+  }
 }
 
 /**
@@ -61,74 +86,169 @@ function usePortfolioData(): MeContextReturnType {
           }
         }
       } catch (err) {
-        console.warn("Failed to read from cache:", err);
+        logger.warn("Failed to read from cache:", err);
       }
     }
     return { data: EMPTY_ME, loading: true, error: undefined };
   });
 
   const fetchData = useCallback(async (force = false) => {
-    // Skip fetch if we have valid cache and not forcing
-    if (!force) {
+    setState((prev) => ({ ...prev, loading: true, error: undefined }));
+
+    // Clear cache if force refresh
+    if (force && typeof window !== "undefined") {
+      try {
+        localStorage.removeItem(CACHE_KEY);
+      } catch (err) {
+        logger.warn("Failed to clear cache:", err);
+      }
+    }
+
+    try {
+      // Use retry logic with exponential backoff
+      const response = await fetchWithRetry("https://api.khan.my.id/me");
+      const apiData = await response.json();
+      const newData = apiData as MeData;
+
+      // Cache the data
+      if (typeof window !== "undefined") {
+        try {
+          const cacheData: CachedData = {
+            data: newData,
+            timestamp: Date.now(),
+          };
+          localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+        } catch (err) {
+          logger.warn("Failed to cache data:", err);
+        }
+      }
+
+      setState({ data: newData, loading: false, error: undefined });
+    } catch (err) {
+      logger.error("Failed to fetch portfolio data:", err);
+
+      // Offline-first fallback strategy:
+      // 1. Try to use expired cache if available
+      // 2. Fall back to static fallback data if no cache exists
+      if (typeof window !== "undefined") {
+        try {
+          const cached = localStorage.getItem(CACHE_KEY);
+          if (cached) {
+            const { data }: CachedData = JSON.parse(cached);
+            if (data && data.name) {
+              // Use expired cache
+              setState({
+                data,
+                loading: false,
+                error: "Using cached data (offline)",
+              });
+              return;
+            }
+          }
+        } catch (cacheErr) {
+          logger.warn("Failed to read from cache:", cacheErr);
+        }
+      }
+
+      // No cache available, use static fallback
+      setState({
+        data: STATIC_FALLBACK,
+        loading: false,
+        error: "Using offline mode",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const initFetch = async () => {
+      // Check cache first - use valid cache if available
       if (typeof window !== "undefined") {
         try {
           const cached = localStorage.getItem(CACHE_KEY);
           if (cached) {
             const { data, timestamp }: CachedData = JSON.parse(cached);
             const isExpired = Date.now() - timestamp > CACHE_TTL;
-            if (!isExpired && data) {
+            if (!isExpired && data && data.name && isMounted) {
               setState({ data, loading: false, error: undefined });
               return;
             }
           }
         } catch (err) {
-          console.warn("Failed to read from cache:", err);
+          logger.warn("Failed to read from cache:", err);
         }
       }
-    }
 
-    setState((prev) => ({ ...prev, loading: true, error: undefined }));
+      if (isMounted) {
+        setState((prev) => ({ ...prev, loading: true, error: undefined }));
 
-    try {
-      const response = await fetch("https://api.khan.my.id/me");
-      if (response.ok) {
-        const apiData = await response.json();
-        const newData = apiData as MeData;
+        try {
+          // Use retry logic with exponential backoff
+          const response = await fetchWithRetry("https://api.khan.my.id/me");
+          const apiData = await response.json();
+          const newData = apiData as MeData;
 
-        // Cache the data
-        if (typeof window !== "undefined") {
-          try {
-            const cacheData: CachedData = {
-              data: newData,
-              timestamp: Date.now(),
-            };
-            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-          } catch (err) {
-            console.warn("Failed to cache data:", err);
+          // Cache the data
+          if (typeof window !== "undefined") {
+            try {
+              const cacheData: CachedData = {
+                data: newData,
+                timestamp: Date.now(),
+              };
+              localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+            } catch (err) {
+              logger.warn("Failed to cache data:", err);
+            }
+          }
+
+          if (isMounted) {
+            setState({ data: newData, loading: false, error: undefined });
+          }
+        } catch (err) {
+          logger.error("Failed to fetch portfolio data:", err);
+
+          if (isMounted) {
+            // Offline-first fallback strategy:
+            // 1. Try to use expired cache if available
+            // 2. Fall back to static fallback data if no cache exists
+            if (typeof window !== "undefined") {
+              try {
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                  const { data }: CachedData = JSON.parse(cached);
+                  if (data && data.name) {
+                    // Use expired cache
+                    setState({
+                      data,
+                      loading: false,
+                      error: "Using cached data (offline)",
+                    });
+                    return;
+                  }
+                }
+              } catch (cacheErr) {
+                logger.warn("Failed to read from cache:", cacheErr);
+              }
+            }
+
+            // No cache available, use static fallback
+            setState({
+              data: STATIC_FALLBACK,
+              loading: false,
+              error: "Using offline mode",
+            });
           }
         }
-
-        setState({ data: newData, loading: false, error: undefined });
-      } else {
-        setState({
-          data: EMPTY_ME,
-          loading: false,
-          error: `Failed to fetch: ${response.status}`,
-        });
       }
-    } catch (err) {
-      console.error("Failed to fetch portfolio data:", err);
-      setState({
-        data: EMPTY_ME,
-        loading: false,
-        error: "Network error",
-      });
-    }
-  }, []);
+    };
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    initFetch();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []); // Empty dependency array - fetch only on mount
 
   return { ...state, ...state.data, refetch: () => fetchData(true) };
 }

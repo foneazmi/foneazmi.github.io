@@ -1,29 +1,29 @@
-import { memo, useCallback, useState } from 'react';
-import { useMe } from '@/context/MeContext';
+import { memo, useCallback, useState } from "react";
+import { useMe } from "@/context/MeContext";
 import {
   IconGitHub,
   IconLinkedIn,
   IconTelegram,
   IconWhatsapp,
   IconEmail,
-} from '@/components/common/Icons';
-import { MapPin } from 'lucide-react';
-import { Marquee } from '@/components/common/Marquee';
-import type { Contact } from '@/types';
+} from "@/components/common/Icons";
+import { MapPin } from "lucide-react";
+import { Marquee } from "@/components/common/Marquee";
+import type { Contact } from "@/types";
 
 // Helper for conditional icon rendering
 const SocialIcon = memo(
-  ({ type, className }: { type: Contact['type']; className?: string }) => {
+  ({ type, className }: { type: Contact["type"]; className?: string }) => {
     switch (type) {
-      case 'gh':
+      case "gh":
         return <IconGitHub className={className} />;
-      case 'li':
+      case "li":
         return <IconLinkedIn className={className} />;
-      case 'tg':
+      case "tg":
         return <IconTelegram className={className} />;
-      case 'wa':
+      case "wa":
         return <IconWhatsapp className={className} />;
-      case 'email':
+      case "email":
         return <IconEmail className={className} />;
       default:
         return null;
@@ -31,15 +31,15 @@ const SocialIcon = memo(
   }
 );
 
-SocialIcon.displayName = 'SocialIcon';
+SocialIcon.displayName = "SocialIcon";
 
-const getContactLabel = (type: Contact['type']): string => {
-  const labels: Record<Contact['type'], string> = {
-    gh: 'GitHub',
-    li: 'LinkedIn',
-    tg: 'Telegram',
-    wa: 'WhatsApp',
-    email: 'Email',
+const getContactLabel = (type: Contact["type"]): string => {
+  const labels: Record<Contact["type"], string> = {
+    gh: "GitHub",
+    li: "LinkedIn",
+    tg: "Telegram",
+    wa: "WhatsApp",
+    email: "Email",
   };
   return labels[type];
 };
@@ -61,19 +61,25 @@ const Home = memo(() => {
         role="status"
         aria-label="Loading profile"
       >
-        <span className="text-3xl">🙈 🙉 🙊</span>
+        <span aria-hidden="true" className="text-3xl">
+          🙈 🙉 🙊
+        </span>
       </div>
     );
   }
 
-  if (data.error) {
+  // Offline-first: Show error only if we have no data at all
+  // If API fails but we have cached data, show the cached data instead
+  if (data.error && !data.name) {
     return (
       <div
         className="flex items-center justify-center min-h-screen"
         role="alert"
         aria-label="Error loading profile"
       >
-        <span className="text-3xl">☠️</span>
+        <span aria-hidden="true" className="text-3xl">
+          ☠️
+        </span>
       </div>
     );
   }
@@ -95,7 +101,7 @@ const Home = memo(() => {
               className="relative shrink-0 group cursor-pointer select-none mx-auto md:mx-0"
               onClick={triggerWave}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   triggerWave();
                 }
@@ -116,7 +122,7 @@ const Home = memo(() => {
               >
                 <span
                   className={`text-2xl wave-on-group-hover ${
-                    isWaving ? 'animate-wave' : ''
+                    isWaving ? "animate-wave" : ""
                   }`}
                   aria-hidden="true"
                 >
@@ -173,6 +179,7 @@ const Home = memo(() => {
                   <span className="text-sm text-neutral-300 group-hover:text-white transition-colors">
                     {getContactLabel(contact.type)}
                   </span>
+                  <span className="sr-only">(opens in new tab)</span>
                 </a>
               ))}
             </div>
@@ -183,6 +190,6 @@ const Home = memo(() => {
   );
 });
 
-Home.displayName = 'Home';
+Home.displayName = "Home";
 
 export default Home;

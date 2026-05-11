@@ -128,17 +128,15 @@ describe('Experience Page', () => {
     }, { timeout: 2000 });
   });
 
-  it('should show error state on fetch failure', async () => {
-    mockFetch.mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-    });
+  it('should show fallback data on fetch failure', async () => {
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
     renderExperience();
 
     await waitFor(() => {
-      expect(screen.getByText('☠️')).toBeInTheDocument();
-    }, { timeout: 2000 });
+      // Should show fallback data instead of error
+      expect(screen.getByText('Experience')).toBeInTheDocument();
+    }, { timeout: 3000 });
   });
 
   it('should have proper heading structure', async () => {

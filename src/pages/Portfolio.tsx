@@ -17,7 +17,9 @@ const Portfolio = memo(() => {
     );
   }
 
-  if (data.error) {
+  // Offline-first: Show error only if we have no data at all
+  // If API fails but we have cached data, show the cached data instead
+  if (data.error && !data.name) {
     return (
       <div
         className="flex items-center justify-center min-h-screen"

@@ -100,16 +100,15 @@ describe('Home Page', () => {
     }, { timeout: 2000 });
   });
 
-  it('should show error state on fetch failure', async () => {
-    mockFetch.mockResolvedValueOnce({
-      ok: false,
-      status: 500,
-    });
+  it('should show fallback data on fetch failure', async () => {
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
 
     renderHome();
 
     await waitFor(() => {
-      expect(screen.getByText('☠️')).toBeInTheDocument();
+      // Should show fallback data instead of error
+      expect(screen.getByText('Farkhan Azmi')).toBeInTheDocument();
+      expect(screen.getByText('Software Engineer')).toBeInTheDocument();
     }, { timeout: 2000 });
   });
 
