@@ -30,5 +30,5 @@ export const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 export const RETRY_CONFIG = {
   maxRetries: 2,
   baseDelay: 100,
-  maxDelay: 200,
+  maxDelay: 2000,
 };

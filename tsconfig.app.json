@@ -4,6 +4,7 @@
     "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["@testing-library/jest-dom", "vitest/globals"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -26,5 +27,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/**/*"]
 }

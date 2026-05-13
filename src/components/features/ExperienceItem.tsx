@@ -10,10 +10,30 @@ interface ExperienceItemProps {
 
 /**
  * Converts date string (MM/YYYY) to comparable number
+ * Validates date format before conversion
  */
-const toComparable = (date: string): number => {
+const toComparable = (date: string): number | null => {
+  // Validate date format (MM/YYYY)
+  const dateRegex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+  if (!dateRegex.test(date.trim())) {
+    return null;
+  }
+  
   const [mm, yyyy] = date.split('/');
-  return Number(yyyy) * 100 + Number(mm);
+  const month = Number(mm);
+  const year = Number(yyyy);
+  
+  // Additional validation for month range
+  if (month < 1 || month > 12) {
+    return null;
+  }
+  
+  // Validate year is reasonable (1900-2100)
+  if (year < 1900 || year > 2100) {
+    return null;
+  }
+  
+  return year * 100 + month;
 };
 
 export const ExperienceItem = memo(
@@ -27,6 +47,7 @@ export const ExperienceItem = memo(
       const earliestStart = data.roles.reduce(
         (acc, r) => {
           const val = toComparable(r.startDate);
+          if (val === null) return acc;
           return acc === null || val < acc.val
             ? { val, str: r.startDate }
             : acc;
@@ -38,6 +59,7 @@ export const ExperienceItem = memo(
         (acc, r) => {
           if (!r.endDate || r.endDate.trim() === '') return acc;
           const val = toComparable(r.endDate);
+          if (val === null) return acc;
           return acc === null || val > acc.val
             ? { val, str: r.endDate }
             : acc;

@@ -9,9 +9,6 @@ export const Marquee = memo(({ skills }: MarqueeProps) => {
     return null;
   }
 
-  // Create repeated arrays for seamless looping
-  const skillRow = [...skills, ...skills, ...skills];
-
   return (
     <div
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-screen h-full overflow-hidden pointer-events-none opacity-30 z-0"
@@ -28,9 +25,18 @@ export const Marquee = memo(({ skills }: MarqueeProps) => {
         style={{ transform: 'rotate(-15deg) scale(1.2)' }}
       >
         <div className="flex gap-8 whitespace-nowrap animate-marquee-diagonal-1">
-          {skillRow.map((skill, index) => (
+          {skills.map((skill, index) => (
             <span
               key={`diag1-${index}`}
+              className="px-6 py-3 rounded-2xl bg-white/5 text-purple-200/80 text-lg font-medium border border-purple-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.1)]"
+            >
+              {skill}
+            </span>
+          ))}
+          {/* Duplicate for seamless loop */}
+          {skills.map((skill, index) => (
+            <span
+              key={`diag1-dup-${index}`}
               className="px-6 py-3 rounded-2xl bg-white/5 text-purple-200/80 text-lg font-medium border border-purple-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(168,85,247,0.1)]"
             >
               {skill}
@@ -45,9 +51,18 @@ export const Marquee = memo(({ skills }: MarqueeProps) => {
         style={{ transform: 'rotate(15deg) scale(1.2)' }}
       >
         <div className="flex gap-8 whitespace-nowrap animate-marquee-diagonal-2">
-          {skillRow.map((skill, index) => (
+          {skills.map((skill, index) => (
             <span
               key={`diag2-${index}`}
+              className="px-6 py-3 rounded-2xl bg-white/5 text-blue-200/80 text-lg font-medium border border-blue-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.1)]"
+            >
+              {skill}
+            </span>
+          ))}
+          {/* Duplicate for seamless loop */}
+          {skills.map((skill, index) => (
+            <span
+              key={`diag2-dup-${index}`}
               className="px-6 py-3 rounded-2xl bg-white/5 text-blue-200/80 text-lg font-medium border border-blue-500/20 whitespace-nowrap backdrop-blur-sm shadow-[0_0_15px_rgba(59,130,246,0.1)]"
             >
               {skill}
