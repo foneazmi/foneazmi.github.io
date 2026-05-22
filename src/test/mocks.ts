@@ -15,6 +15,7 @@ export const mockPortfolio: PortfolioItem[] = [
     description: 'A sample project description',
     link: 'https://project1.com',
     icon: '🚀',
+    stack: ['React Native', 'TypeScript', 'Firebase', 'Redux'],
   },
   {
     text: 'CLI Tool',
@@ -22,6 +23,7 @@ export const mockPortfolio: PortfolioItem[] = [
     description: 'A command-line tool for developers',
     link: 'https://github.com/testuser/cli-tool',
     icon: '⚡',
+    stack: ['Node.js', 'TypeScript', 'Commander.js'],
   },
   {
     image: 'https://example.com/project3.jpg',
@@ -29,6 +31,7 @@ export const mockPortfolio: PortfolioItem[] = [
     description: 'A modern web application',
     link: 'https://webapp.example.com',
     icon: '🌐',
+    stack: ['React', 'Next.js', 'TailwindCSS', 'PostgreSQL', 'Prisma', 'Vercel'],
   },
 ];
 

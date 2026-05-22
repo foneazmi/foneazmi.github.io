@@ -22,6 +22,7 @@ export interface PortfolioItem {
   description: string;
   link?: string;
   icon: string;
+  stack?: string[];
 }
 
 /**

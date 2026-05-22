@@ -68,6 +68,25 @@ export const PortfolioCard = memo(({ item, index }: PortfolioCardProps) => {
           <p className="text-sm text-neutral-400 leading-relaxed line-clamp-3 mb-4">
             {item.description}
           </p>
+
+          {/* Tech Stack Badges */}
+          {item.stack && item.stack.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {item.stack.slice(0, 4).map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-neutral-300 group-hover:border-purple-500/30 transition-colors"
+                >
+                  {tech}
+                </span>
+              ))}
+              {item.stack.length > 4 && (
+                <span className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-neutral-300 group-hover:border-purple-500/30 transition-colors">
+                  +{item.stack.length - 4} more
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </a>
