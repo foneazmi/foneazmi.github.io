@@ -15,6 +15,7 @@ import {
   Pencil,
   Download,
   Upload,
+  Grip,
 } from "lucide-react";
 
 // ──────────────────────────────────────────────
@@ -32,6 +33,12 @@ interface NtpSettings {
   hourFormat: "12" | "24";
   searchEngine: "google" | "duckduckgo" | "bing";
   accentColor: string;
+}
+
+interface NtpBackup {
+  version: number;
+  shortcuts: Shortcut[];
+  settings: NtpSettings;
 }
 
 type Panel = "none" | "add" | "settings" | "edit";
@@ -374,11 +381,25 @@ const ShortcutCard = memo(
     onDelete,
     onEdit,
     accentColor,
+    isDragging,
+    isDragOver,
+    onDragStart,
+    onDragOver,
+    onDragEnter,
+    onDragEnd,
+    onDrop,
   }: {
     shortcut: Shortcut;
     onDelete: (id: string) => void;
     onEdit: (s: Shortcut) => void;
     accentColor: string;
+    isDragging?: boolean;
+    isDragOver?: boolean;
+    onDragStart?: () => void;
+    onDragOver?: (e: React.DragEvent) => void;
+    onDragEnter?: () => void;
+    onDragEnd?: () => void;
+    onDrop?: (e: React.DragEvent) => void;
   }) => {
     const iconType = shortcut.iconType ?? "emoji";
     const emojiIcon = iconType === "emoji" ? shortcut.icon?.trim() : null;
@@ -386,12 +407,32 @@ const ShortcutCard = memo(
 
     return (
       <div
-        className="group relative flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-        style={{ boxShadow: `0 8px 32px ${accentColor}0d` }}
+        draggable
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+        onDragEnter={onDragEnter}
+        onDragEnd={onDragEnd}
+        onDrop={onDrop}
+        className={`group relative flex flex-col items-center gap-2.5 p-4 rounded-2xl border transition-all duration-200 ${
+          isDragging
+            ? "opacity-40 scale-95 border-dashed border-white/20 bg-white/[0.02]"
+            : isDragOver
+              ? "bg-white/[0.08] border-white/25 scale-[1.02]"
+              : "bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.06] hover:-translate-y-0.5 hover:shadow-lg"
+        }`}
+        style={{
+          boxShadow: isDragging ? "none" : `0 8px 32px ${accentColor}0d`,
+          cursor: "grab",
+        }}
       >
         <a
           href={shortcut.url}
           className="flex flex-col items-center gap-2.5 w-full"
+          onDoubleClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onEdit(shortcut);
+          }}
         >
           <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/5 overflow-hidden shrink-0">
             {emojiIcon ? (
@@ -413,6 +454,10 @@ const ShortcutCard = memo(
             {shortcut.title}
           </span>
         </a>
+        {/* drag grip handle */}
+        <div className="absolute top-1.5 left-1.5 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing">
+          <Grip size={12} className="text-white/15 hover:text-white/40" />
+        </div>
         <div className="absolute top-1.5 right-1.5 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={(e) => {
@@ -421,7 +466,7 @@ const ShortcutCard = memo(
               onEdit(shortcut);
             }}
             className="p-1 text-white/15 hover:text-blue-400 rounded-md hover:bg-white/5"
-            title="Edit shortcut"
+            title="Edit shortcut (or double-click card)"
             aria-label={`Edit ${shortcut.title}`}
           >
             <Pencil size={12} />
@@ -621,7 +666,7 @@ const SettingsPanel = memo(
     onClose: () => void;
     onClearShortcuts: () => void;
     onExport: () => void;
-    onImport: (shortcuts: Shortcut[]) => void;
+    onImport: (backup: NtpBackup) => void;
     accentColor: string;
   }) => {
     const [confirmClear, setConfirmClear] = useState(false);
@@ -754,12 +799,12 @@ const SettingsPanel = memo(
                 Data
               </div>
               <div className="flex flex-col gap-2">
-                <button
+                  <button
                   onClick={onExport}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white/70 bg-white/5 hover:bg-white/10 transition-colors w-fit"
                 >
                   <Download size={14} />
-                  Export shortcuts
+                  Export backup
                 </button>
                 <button
                   onClick={() => {
@@ -774,9 +819,13 @@ const SettingsPanel = memo(
                         try {
                           const data = JSON.parse(e.target?.result as string);
                           if (Array.isArray(data)) {
-                            onImport(data);
+                            // Backwards compatible: old format (shortcuts only)
+                            onImport({ version: 0, shortcuts: data, settings });
+                          } else if (data && typeof data === "object" && "shortcuts" in data) {
+                            // New format: full backup
+                            onImport(data as NtpBackup);
                           } else {
-                            alert("Invalid file format");
+                            alert("Invalid backup file format");
                           }
                         } catch {
                           alert("Error reading file");
@@ -789,7 +838,7 @@ const SettingsPanel = memo(
                   className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white/70 bg-white/5 hover:bg-white/10 transition-colors w-fit"
                 >
                   <Upload size={14} />
-                  Import shortcuts
+                  Import backup
                 </button>
               </div>
               {!confirmClear ? (
@@ -855,6 +904,8 @@ export default function NtpPage() {
   );
   const [panel, setPanel] = useState<Panel>("none");
   const [editingShortcut, setEditingShortcut] = useState<Shortcut | null>(null);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [dropIndex, setDropIndex] = useState<number | null>(null);
 
   const deleteShortcut = useCallback(
     (id: string) => {
@@ -870,6 +921,57 @@ export default function NtpPage() {
   const openAdd = useCallback(() => setPanel("add"), []);
   const closePanel = useCallback(() => setPanel("none"), []);
   const openSettings = useCallback(() => setPanel("settings"), []);
+
+  const reorderShortcuts = useCallback(
+    (fromIndex: number, toIndex: number) => {
+      if (fromIndex === toIndex) return;
+      setShortcuts((prev) => {
+        const result = [...prev];
+        const [removed] = result.splice(fromIndex, 1);
+        result.splice(toIndex, 0, removed);
+        return result;
+      });
+    },
+    [setShortcuts],
+  );
+
+  const handleDragStart = useCallback(
+    (index: number) => {
+      setDragIndex(index);
+    },
+    [],
+  );
+
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+    },
+    [],
+  );
+
+  const handleDragEnter = useCallback(
+    (index: number) => {
+      if (dragIndex !== null && dragIndex !== index) {
+        setDropIndex(index);
+      }
+    },
+    [dragIndex],
+  );
+
+  const handleDragEnd = useCallback(() => {
+    if (dragIndex !== null && dropIndex !== null) {
+      reorderShortcuts(dragIndex, dropIndex);
+    }
+    setDragIndex(null);
+    setDropIndex(null);
+  }, [dragIndex, dropIndex, reorderShortcuts]);
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+    },
+    [],
+  );
 
   const startEdit = useCallback((s: Shortcut) => {
     setEditingShortcut(s);
@@ -892,42 +994,63 @@ export default function NtpPage() {
     [setShortcuts, editingShortcut],
   );
 
-  const exportShortcuts = useCallback(() => {
-    const blob = new Blob([JSON.stringify(shortcuts, null, 2)], {
+  const exportSettings = useCallback(() => {
+    const backup: NtpBackup = {
+      version: 1,
+      shortcuts,
+      settings,
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `ntp-shortcuts-${new Date().toISOString().split("T")[0]}.json`;
+    a.download = `ntp-backup-${new Date().toISOString().split("T")[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
-  }, [shortcuts]);
+  }, [shortcuts, settings]);
 
-  const importShortcuts = useCallback(
-    (data: unknown[]) => {
-      const valid = data.every(
-        (item) =>
-          typeof item === "object" &&
-          item !== null &&
-          "title" in item &&
-          "url" in item,
-      );
-      if (!valid) {
-        alert("Invalid shortcut data format");
-        return;
+  const importBackup = useCallback(
+    (backup: NtpBackup) => {
+      // Import shortcuts
+      if (Array.isArray(backup.shortcuts)) {
+        const valid = backup.shortcuts.every(
+          (item) =>
+            typeof item === "object" &&
+            item !== null &&
+            "title" in item &&
+            "url" in item,
+        );
+        if (!valid) {
+          alert("Invalid shortcut data in backup file");
+          return;
+        }
+        const parsed: Shortcut[] = backup.shortcuts.map((item) => ({
+          id: item.id ?? crypto.randomUUID(),
+          title: String(item.title),
+          url: String(item.url),
+          icon: String(item.icon ?? ""),
+          iconType: (item.iconType === "url" ? "url" : "emoji") as "emoji" | "url",
+        }));
+        setShortcuts(parsed);
       }
-      const parsed: Shortcut[] = data.map((item: any) => ({
-        id: item.id ?? crypto.randomUUID(),
-        title: String(item.title),
-        url: String(item.url),
-        icon: String(item.icon ?? ""),
-        iconType: (item.iconType === "url" ? "url" : "emoji") as "emoji" | "url",
-      }));
-      setShortcuts(parsed);
+
+      // Import settings
+      if (backup.settings && typeof backup.settings === "object") {
+        const s = backup.settings;
+        setSettings({
+          hourFormat: s.hourFormat === "12" ? "12" : "24",
+          searchEngine: ["google", "duckduckgo", "bing"].includes(s.searchEngine)
+            ? s.searchEngine
+            : "google",
+          accentColor: typeof s.accentColor === "string" ? s.accentColor : DEFAULT_SETTINGS.accentColor,
+        });
+      }
+
       setPanel("none");
     },
-    [setShortcuts],
+    [setShortcuts, setSettings],
   );
 
   return (
@@ -996,13 +1119,20 @@ export default function NtpPage() {
             </div>
           ) : null}
           <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-3">
-            {shortcuts.map((s) => (
+            {shortcuts.map((s, idx) => (
               <ShortcutCard
                 key={s.id}
                 shortcut={s}
                 onDelete={deleteShortcut}
                 onEdit={startEdit}
                 accentColor={settings.accentColor}
+                isDragging={dragIndex === idx}
+                isDragOver={dropIndex === idx}
+                onDragStart={() => handleDragStart(idx)}
+                onDragOver={handleDragOver}
+                onDragEnter={() => handleDragEnter(idx)}
+                onDragEnd={handleDragEnd}
+                onDrop={handleDrop}
               />
             ))}
             <AddButton onClick={openAdd} />
@@ -1028,8 +1158,8 @@ export default function NtpPage() {
           onUpdate={setSettings}
           onClose={closePanel}
           onClearShortcuts={clearShortcuts}
-          onExport={exportShortcuts}
-          onImport={importShortcuts}
+          onExport={exportSettings}
+          onImport={importBackup}
           accentColor={settings.accentColor}
         />
       )}
