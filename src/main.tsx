@@ -10,6 +10,7 @@ const redirectPath = sessionStorage.getItem("redirect");
 if (redirectPath) {
   sessionStorage.removeItem("redirect");
   window.history.replaceState(null, "", redirectPath);
+  window.dispatchEvent(new Event("popstate"));
 }
 
 createRoot(document.getElementById("root")!).render(
