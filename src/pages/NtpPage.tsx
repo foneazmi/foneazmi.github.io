@@ -228,7 +228,16 @@ const TimeDisplay = memo(({ format }: { format: "12" | "24" }) => {
   const [time, setTime] = useState(formatTime(new Date(), format));
 
   useEffect(() => {
-    const tick = () => setTime(formatTime(new Date(), format));
+    let prevTime = "";
+    const tick = () => {
+      const now = new Date();
+      const newTime = formatTime(now, format);
+      // Only update if the time actually changed (avoid re-renders on second boundaries)
+      if (newTime !== prevTime) {
+        prevTime = newTime;
+        setTime(newTime);
+      }
+    };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
@@ -605,7 +614,11 @@ const ShortcutModal = memo(
                       ? "text-white"
                       : "text-white/40 bg-white/5 hover:text-white/60"
                   }`}
-                  style={iconType === "emoji" ? { backgroundColor: accentColor } : undefined}
+                  style={
+                    iconType === "emoji"
+                      ? { backgroundColor: accentColor }
+                      : undefined
+                  }
                 >
                   Emoji
                 </button>
@@ -617,7 +630,11 @@ const ShortcutModal = memo(
                       ? "text-white"
                       : "text-white/40 bg-white/5 hover:text-white/60"
                   }`}
-                  style={iconType === "url" ? { backgroundColor: accentColor } : undefined}
+                  style={
+                    iconType === "url"
+                      ? { backgroundColor: accentColor }
+                      : undefined
+                  }
                 >
                   Image URL
                 </button>
@@ -625,7 +642,11 @@ const ShortcutModal = memo(
               <input
                 value={icon}
                 onChange={(e) => setIcon(e.target.value)}
-                placeholder={iconType === "emoji" ? "e.g. ⚡" : "e.g. https://example.com/icon.png"}
+                placeholder={
+                  iconType === "emoji"
+                    ? "e.g. ⚡"
+                    : "e.g. https://example.com/icon.png"
+                }
                 maxLength={iconType === "emoji" ? 2 : undefined}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder:text-white/20 outline-none focus:border-white/25 transition-colors"
               />
@@ -799,7 +820,7 @@ const SettingsPanel = memo(
                 Data
               </div>
               <div className="flex flex-col gap-2">
-                  <button
+                <button
                   onClick={onExport}
                   className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-white/70 bg-white/5 hover:bg-white/10 transition-colors w-fit"
                 >
@@ -821,7 +842,11 @@ const SettingsPanel = memo(
                           if (Array.isArray(data)) {
                             // Backwards compatible: old format (shortcuts only)
                             onImport({ version: 0, shortcuts: data, settings });
-                          } else if (data && typeof data === "object" && "shortcuts" in data) {
+                          } else if (
+                            data &&
+                            typeof data === "object" &&
+                            "shortcuts" in data
+                          ) {
                             // New format: full backup
                             onImport(data as NtpBackup);
                           } else {
@@ -907,6 +932,13 @@ export default function NtpPage() {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [dropIndex, setDropIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    document.title = "New Tab";
+    return () => {
+      document.title = "Farkhan Azmi - Software Engineer";
+    };
+  }, []);
+
   const deleteShortcut = useCallback(
     (id: string) => {
       setShortcuts((prev) => prev.filter((s) => s.id !== id));
@@ -935,19 +967,13 @@ export default function NtpPage() {
     [setShortcuts],
   );
 
-  const handleDragStart = useCallback(
-    (index: number) => {
-      setDragIndex(index);
-    },
-    [],
-  );
+  const handleDragStart = useCallback((index: number) => {
+    setDragIndex(index);
+  }, []);
 
-  const handleDragOver = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-    },
-    [],
-  );
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+  }, []);
 
   const handleDragEnter = useCallback(
     (index: number) => {
@@ -966,12 +992,9 @@ export default function NtpPage() {
     setDropIndex(null);
   }, [dragIndex, dropIndex, reorderShortcuts]);
 
-  const handleDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-    },
-    [],
-  );
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+  }, []);
 
   const startEdit = useCallback((s: Shortcut) => {
     setEditingShortcut(s);
@@ -1031,7 +1054,9 @@ export default function NtpPage() {
           title: String(item.title),
           url: String(item.url),
           icon: String(item.icon ?? ""),
-          iconType: (item.iconType === "url" ? "url" : "emoji") as "emoji" | "url",
+          iconType: (item.iconType === "url" ? "url" : "emoji") as
+            | "emoji"
+            | "url",
         }));
         setShortcuts(parsed);
       }
@@ -1041,10 +1066,15 @@ export default function NtpPage() {
         const s = backup.settings;
         setSettings({
           hourFormat: s.hourFormat === "12" ? "12" : "24",
-          searchEngine: ["google", "duckduckgo", "bing"].includes(s.searchEngine)
+          searchEngine: ["google", "duckduckgo", "bing"].includes(
+            s.searchEngine,
+          )
             ? s.searchEngine
             : "google",
-          accentColor: typeof s.accentColor === "string" ? s.accentColor : DEFAULT_SETTINGS.accentColor,
+          accentColor:
+            typeof s.accentColor === "string"
+              ? s.accentColor
+              : DEFAULT_SETTINGS.accentColor,
         });
       }
 
@@ -1056,17 +1086,22 @@ export default function NtpPage() {
   return (
     <div className="min-h-screen w-full bg-[#09090b] text-white flex flex-col items-center justify-center p-6 selection:bg-white/10 overflow-hidden relative">
       {/* ── mesh gradient background ── */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {/* ── mesh gradient background ── */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden bg-[#09090b]">
+        {/* Shape 1: Organic blob - top-left */}
         <div
-          className="absolute w-[800px] h-[800px] rounded-full opacity-[0.07] blur-[120px] mix-blend-screen animate-drift-1"
+          className="absolute w-[800px] h-[700px] opacity-[0.08] blur-[120px] mix-blend-screen animate-drift-1"
           style={{
             background: settings.accentColor,
             top: "-10%",
             left: "-10%",
+            borderRadius: "63% 37% 54% 46% / 56% 48% 52% 44%",
+            willChange: "transform",
           }}
         />
+        {/* Shape 2: Organic blob - bottom-right */}
         <div
-          className="absolute w-[600px] h-[600px] rounded-full opacity-[0.05] blur-[100px] mix-blend-screen animate-drift-2"
+          className="absolute w-[650px] h-[580px] opacity-[0.06] blur-[100px] mix-blend-screen animate-drift-2"
           style={{
             background:
               ACCENT_COLORS.find((c) => c.value === settings.accentColor)
@@ -1075,11 +1110,20 @@ export default function NtpPage() {
                 : settings.accentColor,
             bottom: "-15%",
             right: "-10%",
+            borderRadius: "48% 52% 44% 56% / 44% 56% 44% 56%",
+            willChange: "transform",
           }}
         />
+        {/* Shape 3: Organic blob - center */}
         <div
-          className="absolute w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[90px] mix-blend-screen animate-drift-3"
-          style={{ background: settings.accentColor, top: "40%", left: "50%" }}
+          className="absolute w-[520px] h-[480px] opacity-[0.05] blur-[90px] mix-blend-screen animate-drift-3"
+          style={{
+            background: settings.accentColor,
+            top: "40%",
+            left: "50%",
+            borderRadius: "56% 44% 60% 40% / 40% 56% 44% 60%",
+            willChange: "transform",
+          }}
         />
       </div>
 
@@ -1165,26 +1209,70 @@ export default function NtpPage() {
       )}
 
       {/* ── inline keyframe styles ── */}
+      {/* ── inline keyframe styles ── */}
       <style>{`
         @keyframes slideIn {
           from { transform: translateX(100%); opacity: 0; }
           to { transform: translateX(0); opacity: 1; }
         }
         @keyframes drift1 {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(80px, 60px); }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(90px, 40px, 0) scale(1.03); }
+          50% { transform: translate3d(30px, 80px, 0) scale(1.07); }
+          75% { transform: translate3d(-20px, 50px, 0) scale(1.02); }
         }
         @keyframes drift2 {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(-60px, -80px); }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(-70px, -30px, 0) scale(1.04); }
+          50% { transform: translate3d(-40px, -90px, 0) scale(1.02); }
+          75% { transform: translate3d(-80px, -50px, 0) scale(1.05); }
         }
         @keyframes drift3 {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(-40px, 50px); }
+          0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(50px, -30px, 0) scale(1.05); }
+          50% { transform: translate3d(-60px, 40px, 0) scale(1.03); }
+          75% { transform: translate3d(-20px, 60px, 0) scale(1.06); }
         }
-        .animate-drift-1 { animation: drift1 20s ease-in-out infinite; }
-        .animate-drift-2 { animation: drift2 25s ease-in-out infinite; }
-        .animate-drift-3 { animation: drift3 22s ease-in-out infinite; }
+        @keyframes breathe {
+          0%, 100% { opacity: var(--breath-min); }
+          50% { opacity: var(--breath-max); }
+        }
+        .animate-drift-1 {
+          --breath-min: 0.06;
+          --breath-max: 0.10;
+          animation: drift1 12s cubic-bezier(0.4, 0, 0.6, 1) infinite, breathe 8s ease-in-out infinite, morph1 11s ease-in-out infinite;
+          animation-delay: 0s, 2s, 1s;
+        }
+        .animate-drift-2 {
+          --breath-min: 0.04;
+          --breath-max: 0.08;
+          animation: drift2 15s cubic-bezier(0.4, 0, 0.6, 1) infinite, breathe 10s ease-in-out infinite, morph2 13s ease-in-out infinite;
+          animation-delay: 0s, 4s, 3s;
+        }
+        .animate-drift-3 {
+          --breath-min: 0.03;
+          --breath-max: 0.07;
+          animation: drift3 13s cubic-bezier(0.4, 0, 0.6, 1) infinite, breathe 9s ease-in-out infinite, morph3 12s ease-in-out infinite;
+          animation-delay: 0s, 1s, 2s;
+        }
+        @keyframes morph1 {
+          0%, 100% { border-radius: 63% 37% 54% 46% / 56% 48% 52% 44%; }
+          25% { border-radius: 48% 52% 38% 62% / 58% 43% 57% 42%; }
+          50% { border-radius: 71% 29% 66% 34% / 40% 60% 35% 65%; }
+          75% { border-radius: 45% 55% 52% 48% / 48% 52% 48% 52%; }
+        }
+        @keyframes morph2 {
+          0%, 100% { border-radius: 48% 52% 44% 56% / 44% 56% 44% 56%; }
+          25% { border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; }
+          50% { border-radius: 42% 58% 58% 42% / 58% 42% 58% 42%; }
+          75% { border-radius: 55% 45% 45% 55% / 45% 55% 55% 45%; }
+        }
+        @keyframes morph3 {
+          0%, 100% { border-radius: 56% 44% 60% 40% / 40% 56% 44% 60%; }
+          25% { border-radius: 50% 50% 50% 50% / 60% 40% 60% 40%; }
+          50% { border-radius: 65% 35% 45% 55% / 35% 65% 55% 45%; }
+          75% { border-radius: 40% 60% 55% 45% / 55% 40% 45% 60%; }
+        }
       `}</style>
     </div>
   );
